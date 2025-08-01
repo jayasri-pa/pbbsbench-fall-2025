@@ -1,0 +1,7 @@
+optimization,benchmark_type,program,real_time_s,user_time_s,sys_time_s,total_cpu_time_s
+O0,breadthFirstSearch,deterministicBFS,.056,.036,.019
+O1,breadthFirstSearch,deterministicBFS,.054,.037,.017
+O2,breadthFirstSearch,deterministicBFS,.055,.037,.018
+O3,breadthFirstSearch,deterministicBFS,.055,.037,.017
+Os,breadthFirstSearch,deterministicBFS,.055,.038,.017
+Ofast,breadthFirstSearch,deterministicBFS,.055,.037,.018

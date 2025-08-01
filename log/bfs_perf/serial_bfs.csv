@@ -1,0 +1,7 @@
+optimization,benchmark_type,program,real_time_s,user_time_s,sys_time_s,total_cpu_time_s
+O0,breadthFirstSearch,serialBFS,5.201,55.715,7.376
+O1,breadthFirstSearch,serialBFS,4.940,56.694,8.074
+O2,breadthFirstSearch,serialBFS,4.906,57.891,7.382
+O3,breadthFirstSearch,serialBFS,5.064,56.135,9.089
+Os,breadthFirstSearch,serialBFS,4.905,57.641,7.728
+Ofast,breadthFirstSearch,serialBFS,5.040,58.811,8.064
