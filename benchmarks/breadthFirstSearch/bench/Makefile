@@ -8,10 +8,10 @@ COMMON =
 INCLUDE = -Icommon
 
 %.o : %.C $(COMMON)
-	time $(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(BNCHMRK)Check : $(CHECKFILES)
-	time $(CC) $(LFLAGS) -o $@ $(CHECKFILES)
+	$(CC) $(LFLAGS) -o $@ $(CHECKFILES)
 
 clean :
 	rm -f $(BNCHMRK)Check *.o *.pyc
