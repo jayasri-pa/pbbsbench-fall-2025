@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Setting the optimization flag of g++ in parallelDefs
+# Setting the optimisation flag of g++ in parallelDefs
 
 FILE_PATH="/home/jayasri/fall-2025-sem1/ug-rd/pbbsbench-fall-2025/common/parallelDefs"
 LINE=8
@@ -78,7 +78,7 @@ for NEW_WORD in "${OPTIMIZATION_FLAGS[@]}"; do
 
 
     if [ ! -f "$LOG_FILE" ]; then
-        echo "optimization,benchmark_type,program,real_time_s,user_time_s,sys_time_s,total_cpu_time_s" > "$LOG_FILE"
+        echo "optimization,benchmark_type,program,real_time_s,user_time_s,sys_time_s" > "$LOG_FILE"
     fi
 
     echo "${NEW_WORD/#-/},$BENCHMARK_TYPE,$PROGRAM,$avg_real_s,$avg_user_s,$avg_sys_s" >> "$LOG_FILE"
