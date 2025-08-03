@@ -1,4 +1,4 @@
-optimization,benchmark_type,program,real_time_s,user_time_s,sys_time_s,total_cpu_time_s
+optimization,benchmark_type,program,real_time_s,user_time_s,sys_time_s
 O0,breadthFirstSearch,simpleBFS,.057,.036,.020
 O1,breadthFirstSearch,simpleBFS,.056,.037,.019
 O2,breadthFirstSearch,simpleBFS,.054,.035,.019
