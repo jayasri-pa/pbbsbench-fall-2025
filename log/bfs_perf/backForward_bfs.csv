@@ -1,4 +1,4 @@
-optimization,benchmark_type,program,real_time_s,user_time_s,sys_time_s,total_cpu_time_s
+optimization,benchmark_type,program,real_time_s,user_time_s,sys_time_s
 O0,breadthFirstSearch,backForwardBFS,6.580,56.116,9.096
 O1,breadthFirstSearch,backForwardBFS,4.954,55.547,7.758
 O2,breadthFirstSearch,backForwardBFS,4.624,51.423,8.299
