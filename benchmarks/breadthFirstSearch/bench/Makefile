@@ -16,7 +16,7 @@ INCLUDE = -Icommon
 $(BNCHMRK)Check : $(CHECKFILES)
 	$(CC) $(LFLAGS) -o $@ $(CHECKFILES)
 
-assembly: $(BNCHMRK).s
+assembly: $(BNCHMRK)Check.s
 
 clean :
 	rm -f $(BNCHMRK)Check *.o *.s *.pyc
