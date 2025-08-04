@@ -10,8 +10,13 @@ INCLUDE = -Icommon
 %.o : %.C $(COMMON)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
+%.s : %.C $(COMMON)
+	$(CC) $(CFLAGS) $(INCLUDE) -S $< -o $@
+
 $(BNCHMRK)Check : $(CHECKFILES)
 	$(CC) $(LFLAGS) -o $@ $(CHECKFILES)
 
+assembly: $(BNCHMRK).s
+
 clean :
-	rm -f $(BNCHMRK)Check *.o *.pyc
+	rm -f $(BNCHMRK)Check *.o *.s *.pyc
