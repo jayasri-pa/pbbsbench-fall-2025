@@ -182,9 +182,9 @@ def getProcessors() :
 def compiletest(sdir) :
     dir = "benchmarks/" + sdir
     if (forceCompile) :
-        ss = "cd " + dir + " ; make -s cleanall ; make -s"
+        ss = "cd " + dir + " ; make cleanall ; make"
     else :
-        ss = "cd " + dir + " ; make -s"
+        ss = "cd " + dir + " ; make"
     os.system("echo")
     os.system("echo \"" + ss + "\"")
     os.system(ss)
