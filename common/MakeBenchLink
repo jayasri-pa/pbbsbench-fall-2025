@@ -30,12 +30,17 @@ $(CHECK) : $(CHECK).C
 %.o : %.C $(REQUIRE)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
+assembly: $(BENCH).s
+
+%.s : %.C $(REQUIRE)
+	$(CC) $(CFLAGS) $(INCLUDE) -S $< -o $@
+
 # copy over the generic test code
 testInputs : ../bench/testInputs ../bench/testInputs_small
 	cp ../bench/testInputs ../bench/testInputs_small .
 
 clean :
-	rm -f $(BENCH) *.o
+	rm -f $(BENCH) *.o *.s
 
 cleanall : clean
 	rm -f testInputs*; cd ../bench; make -s clean
