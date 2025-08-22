@@ -28,6 +28,11 @@
 #include "common/graph.h"
 #include "BFS.h"
 
+// -------------------------------------------
+#include "parlay/portability.h"
+#include "parlay/internal/counting_sort.h"
+// -------------------------------------------
+
 namespace delayed = parlay::block_delayed;
 
 using namespace std;
