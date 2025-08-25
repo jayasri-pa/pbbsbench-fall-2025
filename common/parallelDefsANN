@@ -5,12 +5,17 @@ JEMALLOCLD = $(shell jemalloc-config --libdir)
 JEMALLOC = -L$(JEMALLOCLD) -ljemalloc 
 endif
 
-CCFLAGS = -mcx16 -O3 -std=c++17 -march=native -DNDEBUG -I .
+CCFLAGS = -mcx16     -std=c++17 -march=native -DNDEBUG -I .
 CLFLAGS = -ldl $(JEMALLOC)
+# removed -O3 from CCFLAGS to disabble compiler optimizations
 
 OMPFLAGS = -DPARLAY_OPENMP -fopenmp
 CILKFLAGS = -DPARLAY_CILK -fcilkplus
-PBBFLAGS = -DHOMEGROWN -pthread
+PBBFLAGS = -DHOMEGROWN 
+# -pthread
+# removed -pthread from PBBFLAGS to disable it for 
+# multi-threading
+
 
 ifdef OPENMP
 CC = g++
