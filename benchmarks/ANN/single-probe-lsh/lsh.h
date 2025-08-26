@@ -15,14 +15,14 @@ namespace grann {
   inline void prefetch_vector(const char* vec, uint64_t vecsize) {
     uint64_t max_prefetch_size = (vecsize / 64) * 64;
     for (uint64_t d = 0; d < max_prefetch_size; d += 64)
-      _mm_prefetch((const char*) vec + d, _MM_HINT_T0);
+      // _mm_prefetch((const char*) vec + d, _MM_HINT_T0);
   }
 
   // NOTE :: good efficiency when total_vec_size is integral multiple of 64
   inline void prefetch_vector_l2(const char* vec, uint64_t vecsize) {
     uint64_t max_prefetch_size = (vecsize / 64) * 64;
     for (uint64_t d = 0; d < max_prefetch_size; d += 64)
-      _mm_prefetch((const char*) vec + d, _MM_HINT_T1);
+      // _mm_prefetch((const char*) vec + d, _MM_HINT_T1);
   }
 
   class HashTable {
