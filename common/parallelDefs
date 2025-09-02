@@ -11,8 +11,7 @@ CLFLAGS = -ldl $(JEMALLOC)
 
 OMPFLAGS = -DPARLAY_OPENMP -fopenmp
 CILKFLAGS = -DPARLAY_CILK -fcilkplus
-PBBFLAGS = -DHOMEGROWN 
-# -pthread
+PBBFLAGS = -DHOMEGROWN #-pthread
 # removed -pthread from PBBFLAGS to disable it for 
 # multi-threading
 
@@ -28,7 +27,7 @@ LFLAGS = $(CILKFLAGS) $(CLFLAGS)
 
 else
 CC = g++
-CFLAGS = $(PBBFLAGS) $(CCFLAGS)
+CFLAGS = $(PBBFLAGS) $(CCFLAGS) #-DPREFETCH_ENABLE
 LFLAGS = $(PBBFLAGS) $(CLFLAGS)
 endif
 
