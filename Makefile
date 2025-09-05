@@ -1,7 +1,34 @@
 
-DEFAULT_BENCHMARKS = integerSort/parallelRadixSort comparisonSort/sampleSort comparisonSort/serialSort removeDuplicates/serial_hash removeDuplicates/parlayhash histogram/parallel histogram/sequential wordCounts/histogram wordCounts/serial invertedIndex/sequential invertedIndex/parallel suffixArray/parallelRange suffixArray/serialDivsufsort longestRepeatedSubstring/doubling classify/decisionTree minSpanningForest/parallelFilterKruskal minSpanningForest/serialMST spanningForest/ndST spanningForest/serialST breadthFirstSearch/backForwardBFS breadthFirstSearch/serialBFS maximalMatching/serialMatching maximalMatching/incrementalMatching maximalIndependentSet/ndMIS maximalIndependentSet/serialMIS nearestNeighbors/octTree rayCast/kdTree convexHull/quickHull convexHull/serialHull delaunayTriangulation/incrementalDelaunay delaunayRefine/incrementalRefine rangeQuery2d/parallelPlaneSweep rangeQuery2d/serial nBody/parallelCK
+DEFAULT_BENCHMARKS = integerSort/parallelRadixSort \
+	integerSort/serialRadixSort comparisonSort/serialSort \
+	removeDuplicates/serial_hash removeDuplicates/parlayhash \
+	histogram/parallel histogram/sequential \
+	wordCounts/histogram wordCounts/histogramStar \
+	wordCounts/serial invertedIndex/sequential \
+	invertedIndex/parallel suffixArray/parallelRange \
+	suffixArray/serialDivsufsort \
+	longestRepeatedSubstring/doubling \
+	classify/decisionTree minSpanningForest/parallelKruskal \
+	minSpanningForest/parallelFilterKruskal \
+	minSpanningForest/serialMST spanningForest/ndST \
+	spanningForest/serialST breadthFirstSearch/backForwardBFS \
+	breadthFirstSearch/serialBFS \
+	maximalMatching/serialMatching \
+	maximalMatching/incrementalMatching \
+	maximalIndependentSet/ndMIS \
+	maximalIndependentSet/serialMIS nearestNeighbors/octTree \
+	rayCast/kdTree convexHull/quickHull convexHull/serialHull \
+	delaunayTriangulation/incrementalDelaunay \
+	delaunayRefine/incrementalRefine \
+	rangeQuery2d/parallelPlaneSweep rangeQuery2d/serial \
+	nBody/parallelCK BWDecode/listRank
 
-EXT_BENCHMARKS = comparisonSort/quickSort comparisonSort/mergeSort comparisonSort/stableSampleSort comparisonSort/ips4o removeDuplicates/serial_sort suffixArray/parallelKS spanningForest/incrementalST breadthFirstSearch/simpleBFS breadthFirstSearch/deterministicBFS maximalIndependentSet/incrementalMIS 
+EXT_BENCHMARKS = comparisonSort/quickSort \
+	comparisonSort/mergeSort comparisonSort/stableSampleSort \
+	removeDuplicates/serial_sort suffixArray/parallelKS \
+	spanningForest/incrementalST breadthFirstSearch/simpleBFS \
+	breadthFirstSearch/deterministicBFS \
+	maximalIndependentSet/incrementalMIS 
 
 ALL_BENCHMARKS = $(DEFAULT_BENCHMARKS) $(EXT_BENCHMARKS)
 
@@ -24,9 +51,9 @@ FORCE :
 
 clean : FORCE
 	for bench in $(ALL_BENCHMARKS); do \
-	  make clean -s -C benchmarks/$$bench ; \
+	  make clean    -C benchmarks/$$bench ; \
 	done
 	for data in $(DATA_GENERATORS); do \
-	  make clean -s -C testData/$$data ; \
-	  make clean -s -C testData/$$data/data ; \
+	  make clean    -C testData/$$data ; \
+	  make clean    -C testData/$$data/data ; \
 	done
