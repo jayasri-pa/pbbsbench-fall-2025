@@ -2,7 +2,6 @@ import subprocess
 import sys
 import random
 import os
-import numpy as np
 
 def onPprocessors(command,p) :
   if "OPENMP" in os.environ:
@@ -105,8 +104,8 @@ def timeAll(name, runProgram, checkProgram, dataDir, tests, rounds, procs, noOut
     meanOfL1DMPKI = geomean([stats[1] for (w,times,stats) in results])
     meanOfL2MPKI = geomean([stats[2] for (w,times,stats) in results])
     meanOfLLCMPKI = geomean([stats[3] for (w,times,stats) in results])
-    meanOfInstructions = np.mean([stats[4] for (w,times,stats) in results])
-    meanOfCycles = np.mean([stats[5] for (w,times,stats) in results])
+    meanOfInstructions = geomean([stats[4] for (w,times,stats) in results])
+    meanOfCycles = geomean([stats[5] for (w,times,stats) in results])
 
     print(name + " : " + repr(procs) +" : " +
           "geomean of mins = " + stripFloat(meanOfMins) +
