@@ -2,6 +2,7 @@ import subprocess
 import sys
 import random
 import os
+import numpy as np
 
 def onPprocessors(command,p) :
   if "OPENMP" in os.environ:
@@ -34,7 +35,9 @@ def runSingle(runProgram, options, ifile, procs) :
   #print(out)
   try:
     times = [float(str[str.index(':')+2:]) for str in out.split('\n') if str.startswith("Parlay time: ")]
-    return times
+    stats = [float(str[str.index('=')+2:]) for str in out.split('\n') if str.startswith("Event")]
+    # import pdb; pdb.set_trace()
+    return times, stats
   except (ValueError,IndexError):
     raise NameError(comString+"\n"+out)
 
@@ -57,7 +60,7 @@ def runTest(runProgram, checkProgram, dataDir, test, rounds, procs, noOutput, ke
     runOptions = runOptions + " -r " + repr(rounds)
     if (noOutput == 0) :
       runOptions = runOptions + " -o " + outFile
-    times = runSingle(runProgram, runOptions, longInputNames, procs)
+    times, stats = runSingle(runProgram, runOptions, longInputNames, procs)
     if (noOutput == 0) :
       checkString = ("./" + checkProgram + " " + checkOptions + " "
                      + longInputNames + " " + outFile)
@@ -77,7 +80,13 @@ def runTest(runProgram, checkProgram, dataDir, test, rounds, procs, noOutput, ke
       outputStr = " : " + runOptions
     print(shortInputNames + outputStr + " : "
           + ptimes + ", geomean = " + stripFloat(geomean(times)))
-    return [weight,times]
+    print(shortInputNames + " : " + "L1_I_MPKI = " + str(stats[0]) +
+          ", L1_D_MPKI = " + str(stats[1]) + 
+          ", L2_MPKI = " + str(stats[2]) + 
+          ", LLC_MPKI = " + str(stats[3]) +
+          ", #Instructions = " + str(stats[4]) + 
+          ", #Cycles = " + str(stats[5]))
+    return [weight,times,stats]
     
 def averageTime(times) :
     return sum(times)/len(times)
@@ -90,11 +99,24 @@ def timeAll(name, runProgram, checkProgram, dataDir, tests, rounds, procs, noOut
     results = [runTest(runProgram, checkProgram, dataDir, test, rounds, procs,
                        noOutput, keepData)
                for test in tests]
-    meanOfMeans = geomean([geomean(times) for (w,times) in results])
-    meanOfMins = geomean([sorted(times)[0] for (w,times) in results])
+    meanOfMeans = geomean([geomean(times) for (w,times,stats) in results])
+    meanOfMins = geomean([sorted(times)[0] for (w,times,stats) in results])
+    meanOfL1IMPKI = geomean([stats[0] for (w,times,stats) in results])
+    meanOfL1DMPKI = geomean([stats[1] for (w,times,stats) in results])
+    meanOfL2MPKI = geomean([stats[2] for (w,times,stats) in results])
+    meanOfLLCMPKI = geomean([stats[3] for (w,times,stats) in results])
+    meanOfInstructions = np.mean([stats[4] for (w,times,stats) in results])
+    meanOfCycles = np.mean([stats[5] for (w,times,stats) in results])
+
     print(name + " : " + repr(procs) +" : " +
           "geomean of mins = " + stripFloat(meanOfMins) +
-          ", geomean of geomeans = " + stripFloat(meanOfMeans))
+          ", geomean of geomeans = " + stripFloat(meanOfMeans) +
+          ", geomean of L1IMPKI = " + stripFloat(meanOfL1IMPKI) +
+          ", geomean of L1DMPKI  = " + stripFloat(meanOfL1DMPKI) +
+          ", geomean of L2MPKI = " + stripFloat(meanOfL2MPKI) +
+          ", geomean of LLCMPKI = " + stripFloat(meanOfLLCMPKI) +
+          ", mean of Instructions = " + stripFloat(meanOfInstructions) +
+          ", mean of Cycles = " + stripFloat(meanOfCycles))
     if (addToDatabase) :
       try:
         dbAddResult(problem=problem, program=runProgram, results=results, numProcs=procs, mean=totalTimeMean/totalWeight,
