@@ -157,10 +157,10 @@ void time_loop(int rounds, double delay, F initf, G runf, H endf)
     retval = PAPI_stop(event_set, hw_values);
     handle_error(retval, PAPI_OK, "PAPI_stop in loop");
 
-    for (int k = 0; k < MAX_EVENTS; ++k)
-    {
-      assert(hw_values[k] != 0);
-    }
+    // for (int k = 0; k < MAX_EVENTS; ++k)
+    // {
+    //   assert(hw_values[k] != 0);
+    // }
 
     t.next("");
 

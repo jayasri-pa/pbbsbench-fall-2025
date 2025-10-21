@@ -114,8 +114,8 @@ def timeAll(name, runProgram, checkProgram, dataDir, tests, rounds, procs, noOut
           ", geomean of L1DMPKI  = " + stripFloat(meanOfL1DMPKI) +
           ", geomean of L2MPKI = " + stripFloat(meanOfL2MPKI) +
           ", geomean of LLCMPKI = " + stripFloat(meanOfLLCMPKI) +
-          ", mean of Instructions = " + stripFloat(meanOfInstructions) +
-          ", mean of Cycles = " + stripFloat(meanOfCycles))
+          ", geomean of Instructions = " + stripFloat(meanOfInstructions) +
+          ", geomean of Cycles = " + stripFloat(meanOfCycles))
     if (addToDatabase) :
       try:
         dbAddResult(problem=problem, program=runProgram, results=results, numProcs=procs, mean=totalTimeMean/totalWeight,

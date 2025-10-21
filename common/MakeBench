@@ -15,6 +15,7 @@ INCLUDE =
 all : $(BENCH) testInputs
 	cd ../bench; make -s $(CHECK)
 
+PAPI_DIR = ${HOME}/papi/src/install
 PAPI_INC = -I${PAPI_DIR}/include
 PAPI_LIB = -L${PAPI_DIR}/lib -lpapi
 
