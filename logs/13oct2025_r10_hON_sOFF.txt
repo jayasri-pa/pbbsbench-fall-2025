@@ -1,0 +1,454 @@
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/integerSort/parallelRadixSort ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -include isort.h -o isort ../bench/isortTime.C -DHOMEGROWN -pthread -ldl 
+cd ../bench; make -s isortCheck
+cd benchmarks/integerSort/parallelRadixSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int : -b 24 -r 10 -o /tmp/ofile917279_658367 : '1.294', '1.294', '1.292', '1.292', '1.294', '1.294', '1.293', '1.302', '1.293', '1.295', geomean = 1.294
+exptSeq_10M_int : -b 24 -r 10 -o /tmp/ofile951528_89217 : '1.313', '1.313', '1.315', '1.313', '1.313', '1.311', '1.311', '1.312', '1.313', '1.313', geomean = 1.313
+randomSeq_10M_int_pair_int : -b 24 -r 10 -o /tmp/ofile482870_722569 : '1.288', '1.288', '1.286', '1.29', '1.288', '1.327', '1.289', '1.288', '1.289', '1.288', geomean = 1.292
+randomSeq_10M_256_int_pair_int : -b 8 -r 10 -o /tmp/ofile552458_202969 : '0.438', '0.438', '0.437', '0.436', '0.437', '0.435', '0.436', '0.435', '0.437', '0.436', geomean = 0.436
+parallelRadixSort : 1 : geomean of mins = 0.986, geomean of geomeans = 0.989
+
+cd benchmarks/integerSort/serialRadixSort ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -include isort.h -o isort ../bench/isortTime.C 
+cd ../bench; make -s isortCheck
+cd benchmarks/integerSort/serialRadixSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int : -b 24 -r 10 -o /tmp/ofile5974_21487 : '1.267', '1.271', '1.268', '1.266', '1.269', '1.266', '1.265', '1.267', '1.267', '1.264', geomean = 1.267
+exptSeq_10M_int : -b 24 -r 10 -o /tmp/ofile296369_6612 : '1.265', '1.266', '1.265', '1.265', '1.265', '1.265', '1.265', '1.265', '1.27', '1.272', geomean = 1.266
+randomSeq_10M_int_pair_int : -b 24 -r 10 -o /tmp/ofile263016_472685 : '1.268', '1.267', '1.266', '1.266', '1.267', '1.269', '1.267', '1.264', '1.271', '1.269', geomean = 1.267
+randomSeq_10M_256_int_pair_int : -b 8 -r 10 -o /tmp/ofile74658_20582 : '0.43', '0.432', '0.43', '0.43', '0.43', '0.429', '0.43', '0.43', '0.43', '0.432', geomean = 0.43
+serialRadixSort : 1 : geomean of mins = 0.965, geomean of geomeans = 0.967
+
+cd benchmarks/comparisonSort/quickSort ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -include sort.h -o sort ../bench/sortTime.C -DHOMEGROWN -pthread -ldl 
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/quickSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile577266_178122 : '1.603', '1.604', '1.605', '1.606', '1.609', '1.605', '1.604', '1.64', '1.604', '1.607', geomean = 1.609
+exptSeq_10M_double :  -r 10 -o /tmp/ofile532746_390204 : '1.095', '1.093', '1.096', '1.092', '1.092', '1.094', '1.097', '1.095', '1.092', '1.094', geomean = 1.094
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile842188_109825 : '0.752', '0.754', '0.754', '0.752', '0.754', '0.754', '0.754', '0.753', '0.753', '0.754', geomean = 0.753
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile700842_673953 : '2.805', '2.833', '2.801', '2.808', '2.807', '2.804', '2.804', '2.808', '2.807', '2.806', geomean = 2.808
+trigramSeq_10M :  -r 10 -o /tmp/ofile984744_518545 : '5.572', '5.583', '5.567', '5.582', '5.577', '5.619', '5.585', '5.577', '5.605', '5.568', geomean = 5.583
+quickSort : 1 : geomean of mins = 1.83, geomean of geomeans = 1.835
+
+cd benchmarks/comparisonSort/mergeSort ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -include sort.h -o sort ../bench/sortTime.C -DHOMEGROWN -pthread -ldl 
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/mergeSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile242383_18011 : '3.204', '3.167', '3.171', '3.165', '3.166', '3.166', '3.204', '3.167', '3.166', '3.167', geomean = 3.174
+exptSeq_10M_double :  -r 10 -o /tmp/ofile533277_542517 : '2.934', '2.926', '2.926', '2.929', '2.927', '2.925', '2.96', '2.927', '2.924', '2.932', geomean = 2.931
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile999339_930335 : '1.535', '1.541', '1.538', '1.537', '1.538', '1.537', '1.537', '1.534', '1.54', '1.543', geomean = 1.538
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile755282_349633 : '4.013', '4.011', '4.005', '4.015', '4.007', '4.013', '4.008', '4.009', '4.049', '4.009', geomean = 4.014
+trigramSeq_10M :  -r 10 -o /tmp/ofile247346_830470 : '9.622', '9.667', '9.631', '9.673', '9.628', '9.629', '9.629', '9.664', '9.627', '9.668', geomean = 9.644
+mergeSort : 1 : geomean of mins = 3.529, geomean of geomeans = 3.537
+
+cd benchmarks/comparisonSort/stableSampleSort ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -include sort.h -o sort ../bench/sortTime.C -DHOMEGROWN -pthread -ldl 
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/stableSampleSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile6628_700039 : '2.712', '2.732', '2.69', '2.69', '2.689', '2.692', '2.693', '2.692', '2.696', '2.707', geomean = 2.699
+exptSeq_10M_double :  -r 10 -o /tmp/ofile751967_51609 : '2.396', '2.378', '2.373', '2.414', '2.373', '2.376', '2.373', '2.373', '2.373', '2.372', geomean = 2.38
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile233172_694263 : '1.579', '1.578', '1.581', '1.577', '1.578', '1.58', '1.575', '1.577', '1.576', '1.617', geomean = 1.582
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile128180_595461 : '3.73', '3.728', '3.687', '3.689', '3.689', '3.688', '3.686', '3.726', '3.689', '3.685', geomean = 3.7
+trigramSeq_10M :  -r 10 -o /tmp/ofile119531_83874 : '10.17', '10.083', '10.095', '10.089', '10.116', '10.085', '10.127', '10.082', '10.094', '10.085', geomean = 10.102
+stableSampleSort : 1 : geomean of mins = 3.269, geomean of geomeans = 3.28
+
+cd benchmarks/comparisonSort/serialSort ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -include sort.h -o sort ../bench/sortTime.C 
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/serialSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile854468_835004 : '1.678', '1.645', '1.645', '1.647', '1.643', '1.644', '1.643', '1.644', '1.652', '1.644', geomean = 1.648
+exptSeq_10M_double :  -r 10 -o /tmp/ofile781178_551449 : '1.453', '1.455', '1.455', '1.454', '1.453', '1.453', '1.454', '1.493', '1.453', '1.453', geomean = 1.458
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile799560_240864 : '0.703', '0.697', '0.702', '0.695', '0.702', '0.7', '0.697', '0.692', '0.697', '0.702', geomean = 0.699
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile616527_253373 : '2.462', '2.47', '2.464', '2.464', '2.466', '2.467', '2.464', '2.465', '2.464', '2.499', geomean = 2.468
+trigramSeq_10M :  -r 10 -o /tmp/ofile224096_760061 : '9.035', '9.029', '9.068', '9.038', '9.05', '9.029', '9.065', '9.044', '9.072', '9.033', geomean = 9.046
+serialSort : 1 : geomean of mins = 2.056, geomean of geomeans = 2.064
+
+cd benchmarks/removeDuplicates/serial_hash ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -include dedup.h -o dedup ../bench/dedupTime.C 
+cd ../bench; make -s dedupCheck
+cd benchmarks/removeDuplicates/serial_hash ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int :  -r 10 -o /tmp/ofile542627_734835 : '2.757', '2.723', '2.73', '2.726', '2.728', '2.762', '2.723', '2.723', '2.726', '2.725', geomean = 2.732
+exptSeq_10M_int :  -r 10 -o /tmp/ofile894824_513286 : '1.547', '1.544', '1.547', '1.55', '1.55', '1.547', '1.547', '1.547', '1.586', '1.549', geomean = 1.551
+trigramSeq_10M :  -r 10 -o /tmp/ofile557423_500956 : '2.358', '2.358', '2.364', '2.364', '2.366', '2.373', '2.364', '2.367', '2.366', '2.364', geomean = 2.364
+serial_hash : 1 : geomean of mins = 2.148, geomean of geomeans = 2.156
+
+cd benchmarks/removeDuplicates/serial_sort ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -include dedup.h -o dedup ../bench/dedupTime.C 
+cd ../bench; make -s dedupCheck
+cd benchmarks/removeDuplicates/serial_sort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int :  -r 10 -o /tmp/ofile338145_779113 : '1.416', '1.418', '1.452', '1.418', '1.422', '1.419', '1.414', '1.417', '1.418', '1.416', geomean = 1.421
+exptSeq_10M_int :  -r 10 -o /tmp/ofile652749_602120 : '1.197', '1.195', '1.198', '1.201', '1.196', '1.198', '1.198', '1.194', '1.196', '1.2', geomean = 1.197
+trigramSeq_10M :  -r 10 -o /tmp/ofile101909_50216 : '10.616', '10.57', '10.602', '10.575', '10.58', '10.574', '10.612', '10.59', '10.616', '10.587', geomean = 10.592
+serial_sort : 1 : geomean of mins = 2.613, geomean of geomeans = 2.622
+
+cd benchmarks/removeDuplicates/parlayhash ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -include dedup.h -o dedup ../bench/dedupTime.C -DHOMEGROWN -pthread -ldl 
+cd ../bench; make -s dedupCheck
+cd benchmarks/removeDuplicates/parlayhash ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int :  -r 10 -o /tmp/ofile597330_965631 : '0.9', '0.899', '0.9', '0.9', '0.902', '0.901', '0.9', '0.9', '0.9', '0.901', geomean = 0.9
+exptSeq_10M_int :  -r 10 -o /tmp/ofile766225_703343 : '0.797', '0.798', '0.797', '0.796', '0.797', '0.798', '0.798', '0.796', '0.796', '0.799', geomean = 0.797
+trigramSeq_10M :  -r 10 -o /tmp/ofile536148_200890 : '3.232', '3.234', '3.235', '3.235', '3.236', '3.233', '3.234', '3.232', '3.233', '3.271', geomean = 3.237
+parlayhash : 1 : geomean of mins = 1.323, geomean of geomeans = 1.325
+
+cd benchmarks/histogram/sequential ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o histogramTime.o -c ../bench/histogramTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c histogram.C -o histogram.o
+g++ -o histogram histogramTime.o histogram.o 
+cd benchmarks/histogram/sequential ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_256_int : -b 256 -r 10 -o /tmp/ofile700892_843566 : '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', geomean = 0.116
+randomSeq_10M_100K_int : -b 100000 -r 10 -o /tmp/ofile350453_538426 : '0.116', '0.12', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', geomean = 0.117
+randomSeq_10M_int : -b 10000000 -r 10 -o /tmp/ofile222827_966166 : '0.382', '0.383', '0.382', '0.382', '0.385', '0.382', '0.383', '0.383', '0.382', '0.385', geomean = 0.383
+exptSeq_10M_int : -b 10000000 -r 10 -o /tmp/ofile280046_828756 : '0.311', '0.31', '0.309', '0.312', '0.309', '0.308', '0.317', '0.309', '0.31', '0.31', geomean = 0.31
+almostEqualSeq_10M : -b 10000000 -r 10 -o /tmp/ofile364207_601607 : '0.094', '0.094', '0.127', '0.094', '0.094', '0.094', '0.094', '0.094', '0.094', '0.094', geomean = 0.097
+sequential : 1 : geomean of mins = 0.172, geomean of geomeans = 0.173
+
+cd benchmarks/histogram/parallel ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o histogramTime.o -c ../bench/histogramTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c histogram.C -o histogram.o
+g++ -o histogram histogramTime.o histogram.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/histogram/parallel ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_256_int : -b 256 -r 10 -o /tmp/ofile337581_119909 : '0.392', '0.393', '0.392', '0.392', '0.392', '0.393', '0.392', '0.392', '0.392', '0.392', geomean = 0.392
+randomSeq_10M_100K_int : -b 100000 -r 10 -o /tmp/ofile509611_430574 : '0.583', '0.584', '0.584', '0.583', '0.584', '0.583', '0.585', '0.585', '0.584', '0.583', geomean = 0.584
+randomSeq_10M_int : -b 10000000 -r 10 -o /tmp/ofile933245_524944 : '0.694', '0.693', '0.695', '0.693', '0.7', '0.694', '0.696', '0.693', '0.695', '0.698', geomean = 0.695
+exptSeq_10M_int : -b 10000000 -r 10 -o /tmp/ofile117412_410777 : '0.706', '0.708', '0.71', '0.707', '0.707', '0.708', '0.711', '0.709', '0.707', '0.747', geomean = 0.712
+almostEqualSeq_10M : -b 10000000 -r 10 -o /tmp/ofile876258_479057 : '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', geomean = 0.079
+parallel : 1 : geomean of mins = 0.388, geomean of geomeans = 0.39
+
+cd benchmarks/wordCounts/histogram ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o wcTime.o -c ../bench/wcTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c wc.C -o wc.o
+g++ -o wc wcTime.o wc.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/wordCounts/histogram ; ./testInputs_small -r 10 -p 1
+trigramString_25000000 :  -r 10 -o /tmp/ofile854167_276708 : '6.44', '6.396', '6.395', '6.401', '6.446', '6.402', '6.407', '6.4', '6.406', '6.436', geomean = 6.413
+wikisamp.xml :  -r 10 -o /tmp/ofile402427_390345 : '23.606', '23.642', '23.603', '23.663', '23.66', '23.641', '23.634', '23.613', '23.67', '23.619', geomean = 23.635
+histogram : 1 : geomean of mins = 12.286, geomean of geomeans = 12.311
+
+cd benchmarks/wordCounts/histogramStar ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o wcTime.o -c ../bench/wcTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c wc.C -o wc.o
+g++ -o wc wcTime.o wc.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/wordCounts/histogramStar ; ./testInputs_small -r 10 -p 1
+trigramString_25000000 :  -r 10 -o /tmp/ofile204996_34993 : '5.436', '5.387', '5.389', '5.393', '5.439', '5.382', '5.387', '5.395', '5.396', '5.391', geomean = 5.399
+wikisamp.xml :  -r 10 -o /tmp/ofile344945_405378 : '19.451', '19.471', '19.487', '19.47', '19.487', '19.5', '19.446', '19.501', '19.487', '19.462', geomean = 19.476
+histogramStar : 1 : geomean of mins = 10.23, geomean of geomeans = 10.255
+
+cd benchmarks/wordCounts/serial ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o wcTime.o -c ../bench/wcTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c wc.C -o wc.o
+g++ -o wc wcTime.o wc.o 
+cd benchmarks/wordCounts/serial ; ./testInputs_small -r 10 -p 1
+trigramString_25000000 :  -r 10 -o /tmp/ofile359914_646992 : '1.185', '1.179', '1.181', '1.182', '1.181', '1.181', '1.183', '1.176', '1.184', '1.18', geomean = 1.181
+wikisamp.xml :  -r 10 -o /tmp/ofile108500_465824 : '2.75', '2.738', '2.744', '2.738', '2.751', '2.746', '2.743', '2.736', '2.738', '2.741', geomean = 2.743
+serial : 1 : geomean of mins = 1.794, geomean of geomeans = 1.8
+
+cd benchmarks/invertedIndex/sequential ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o indexTime.o -c ../bench/indexTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c index.C -o index.o
+g++ -o index indexTime.o index.o 
+cd benchmarks/invertedIndex/sequential ; ./testInputs_small -r 10 -p 1
+wikisamp.xml :  -r 10 -o /tmp/ofile506318_572358 : '5.357', '5.361', '5.39', '5.356', '5.364', '5.356', '5.361', '5.356', '5.393', '5.354', geomean = 5.365
+sequential : 1 : geomean of mins = 5.354, geomean of geomeans = 5.365
+
+cd benchmarks/invertedIndex/parallel ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o indexTime.o -c ../bench/indexTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c index.C -o index.o
+g++ -o index indexTime.o index.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/invertedIndex/parallel ; ./testInputs_small -r 10 -p 1
+wikisamp.xml :  -r 10 -o /tmp/ofile932998_1573 : '22.714', '22.705', '22.683', '22.703', '22.706', '22.674', '22.751', '22.68', '22.713', '22.701', geomean = 22.703
+parallel : 1 : geomean of mins = 22.674, geomean of geomeans = 22.703
+
+cd benchmarks/suffixArray/parallelKS ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o SATime.o -c ../bench/SATime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c SA.C -o SA.o
+g++ -o SA SATime.o SA.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/suffixArray/parallelKS ; ./testInputs_small -r 10 -p 1
+trigramString_10000000 :  -r 10 -o /tmp/ofile353380_989473 : '11.904', '11.875', '11.912', '11.882', '11.88', '11.915', '11.873', '11.911', '11.883', '11.892', geomean = 11.893
+chr22.dna :  -r 10 -o /tmp/ofile369254_8752 : '59.568', '59.394', '59.599', '59.298', '59.665', '59.367', '59.514', '59.415', '59.602', '59.283', geomean = 59.47
+parallelKS : 1 : geomean of mins = 26.53, geomean of geomeans = 26.594
+
+cd benchmarks/suffixArray/parallelRange ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o SATime.o -c ../bench/SATime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c SA.C -o SA.o
+g++ -o SA SATime.o SA.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/suffixArray/parallelRange ; ./testInputs_small -r 10 -p 1
+trigramString_10000000 :  -r 10 -o /tmp/ofile219660_741959 : '7.554', '7.586', '7.55', '7.552', '7.551', '7.551', '7.557', '7.552', '7.587', '7.548', geomean = 7.559
+chr22.dna :  -r 10 -o /tmp/ofile713008_995340 : '36.862', '36.894', '36.864', '36.851', '36.863', '36.863', '36.886', '36.856', '36.863', '36.852', geomean = 36.865
+parallelRange : 1 : geomean of mins = 16.678, geomean of geomeans = 16.693
+
+cd benchmarks/suffixArray/serialDivsufsort ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o SATime.o -c ../bench/SATime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c SA.C -o SA.o
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c divsufsort.C -o divsufsort.o
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c sssort.C -o sssort.o
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c trsort.C -o trsort.o
+g++ -o SA SATime.o SA.o divsufsort.o sssort.o trsort.o   
+cd benchmarks/suffixArray/serialDivsufsort ; ./testInputs_small -r 10 -p 1
+trigramString_10000000 :  -r 10 -o /tmp/ofile778491_587934 : '0.875', '0.874', '0.871', '0.87', '0.874', '0.873', '0.874', '0.872', '0.875', '0.872', geomean = 0.873
+chr22.dna :  -r 10 -o /tmp/ofile878679_888246 : '3.493', '3.493', '3.505', '3.49', '3.493', '3.495', '3.496', '3.497', '3.538', '3.5', geomean = 3.5
+serialDivsufsort : 1 : geomean of mins = 1.743, geomean of geomeans = 1.748
+
+cd benchmarks/longestRepeatedSubstring/doubling ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o lrsTime.o -c ../bench/lrsTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c lrs.C -o lrs.o
+g++ -o lrs lrsTime.o lrs.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/longestRepeatedSubstring/doubling ; ./testInputs_small -r 10 -p 1
+chr22.dna :  -r 10 -o /tmp/ofile170419_311526 : '50.659', '50.692', '50.671', '50.664', '50.696', '50.684', '50.693', '50.718', '50.7', '50.657', geomean = 50.683
+doubling : 1 : geomean of mins = 50.657, geomean of geomeans = 50.683
+
+cd benchmarks/classify/decisionTree ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o classifyTime.o -c ../bench/classifyTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c classify.C -o classify.o
+g++ -o classify classifyTime.o classify.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/classify/decisionTree ; ./testInputs_small -r 10 -p 1
+covtype.data :  -r 10 -o /tmp/ofile959654_770656 : '166.156', '166.218', '166.189', '166.143', '166.163', '166.265', '166.232', '166.192', '166.234', '166.155', geomean = 166.195
+decisionTree : 1 : geomean of mins = 166.143, geomean of geomeans = 166.195
+
+cd benchmarks/minSpanningForest/parallelKruskal ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o MSTTime.o -c ../bench/MSTTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c MST.C -o MST.o
+g++ -o MST MSTTime.o MST.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/minSpanningForest/parallelKruskal ; ./testInputs_small -r 10 -p 1
+randLocalGraph_WE_10_2000000 :  -r 10 -o /tmp/ofile987539_251050 : '11.856', '11.832', '11.883', '11.888', '11.834', '11.856', '11.853', '11.871', '11.899', '11.857', geomean = 11.863
+rMatGraph_WE_12_2250000 :  -r 10 -o /tmp/ofile254080_935669 : '16.848', '16.813', '16.844', '16.827', '16.858', '16.828', '16.844', '16.853', '16.827', '16.868', geomean = 16.841
+3Dgrid_WE_8000000 :  -r 10 -o /tmp/ofile943927_875599 : '20.416', '20.449', '20.443', '20.425', '20.458', '20.412', '20.416', '20.448', '20.446', '20.42', geomean = 20.433
+parallelKruskal : 1 : geomean of mins = 15.953, geomean of geomeans = 15.982
+
+cd benchmarks/minSpanningForest/parallelFilterKruskal ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o MSTTime.o -c ../bench/MSTTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c MST.C -o MST.o
+g++ -o MST MSTTime.o MST.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/minSpanningForest/parallelFilterKruskal ; ./testInputs_small -r 10 -p 1
+randLocalGraph_WE_10_2000000 :  -r 10 -o /tmp/ofile405138_124573 : '9.597', '9.564', '9.568', '9.601', '9.576', '9.586', '9.56', '9.567', '9.568', '9.6', geomean = 9.579
+rMatGraph_WE_12_2250000 :  -r 10 -o /tmp/ofile808768_551569 : '13.903', '13.955', '13.895', '13.943', '13.914', '13.937', '13.927', '13.95', '13.931', '13.93', geomean = 13.928
+3Dgrid_WE_8000000 :  -r 10 -o /tmp/ofile634694_867299 : '20.737', '20.695', '20.674', '20.708', '20.718', '20.717', '20.715', '20.711', '20.697', '20.7', geomean = 20.707
+parallelFilterKruskal : 1 : geomean of mins = 14.004, geomean of geomeans = 14.032
+
+cd benchmarks/minSpanningForest/serialMST ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o MSTTime.o -c ../bench/MSTTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c MST.C -o MST.o
+g++ -o MST MSTTime.o MST.o 
+cd benchmarks/minSpanningForest/serialMST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_WE_10_2000000 :  -r 10 -o /tmp/ofile405881_284304 : '5.021', '5.016', '5.016', '5.018', '5.012', '5.014', '5.05', '5.012', '5.014', '5.014', geomean = 5.019
+rMatGraph_WE_12_2250000 :  -r 10 -o /tmp/ofile255367_530737 : '7.656', '7.644', '7.661', '7.681', '7.668', '7.664', '7.689', '7.638', '7.679', '7.654', geomean = 7.663
+3Dgrid_WE_8000000 :  -r 10 -o /tmp/ofile841090_267481 : '10.031', '9.985', '10.019', '10.003', '10.', '10.023', '10.001', '10.028', '9.996', '10.003', geomean = 10.009
+serialMST : 1 : geomean of mins = 7.257, geomean of geomeans = 7.274
+
+cd benchmarks/spanningForest/incrementalST ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o STTime.o -c ../bench/STTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c ST.C -o ST.o
+g++ -o ST STTime.o ST.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/spanningForest/incrementalST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile842349_562154 : '4.262', '4.258', '4.247', '4.277', '4.305', '4.249', '4.248', '4.287', '4.252', '4.253', geomean = 4.264
+rMatGraph_E_12_2250000 :  -r 10 -o /tmp/ofile269844_500365 : '6.986', '7.005', '7.043', '6.992', '6.994', '7.039', '6.995', '6.985', '6.998', '7.007', geomean = 7.004
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile785263_950523 : '9.93', '9.987', '9.952', '9.96', '9.982', '9.951', '9.973', '9.933', '9.945', '9.95', geomean = 9.956
+incrementalST : 1 : geomean of mins = 6.654, geomean of geomeans = 6.675
+
+cd benchmarks/spanningForest/ndST ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o STTime.o -c ../bench/STTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c ST.C -o ST.o
+g++ -o ST STTime.o ST.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/spanningForest/ndST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile770207_360402 : '2.5', '2.506', '2.51', '2.507', '2.527', '2.513', '2.502', '2.51', '2.51', '2.504', geomean = 2.509
+rMatGraph_E_12_2250000 :  -r 10 -o /tmp/ofile242941_460635 : '4.053', '3.994', '3.994', '4.', '3.996', '4.035', '4.017', '3.997', '4.008', '4.004', geomean = 4.01
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile278391_543677 : '6.354', '6.314', '6.319', '6.303', '6.371', '6.334', '6.332', '6.325', '6.329', '6.357', geomean = 6.334
+ndST : 1 : geomean of mins = 3.978, geomean of geomeans = 3.994
+
+cd benchmarks/spanningForest/serialST ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o STTime.o -c ../bench/STTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c ST.C -o ST.o
+g++ -o ST STTime.o ST.o 
+cd benchmarks/spanningForest/serialST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile465747_822536 : '2.39', '2.401', '2.39', '2.388', '2.438', '2.39', '2.39', '2.404', '2.387', '2.387', geomean = 2.396
+rMatGraph_E_12_2250000 :  -r 10 -o /tmp/ofile921851_948668 : '3.611', '3.621', '3.617', '3.615', '3.607', '3.637', '3.619', '3.609', '3.61', '3.624', geomean = 3.617
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile274825_61844 : '5.724', '5.708', '5.673', '5.665', '5.751', '5.677', '5.665', '5.705', '5.707', '5.673', geomean = 5.695
+serialST : 1 : geomean of mins = 3.654, geomean of geomeans = 3.668
+
+cd benchmarks/breadthFirstSearch/simpleBFS ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o BFSTime.o -c ../bench/BFSTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c BFS.C -o BFS.o
+g++ -o BFS BFSTime.o BFS.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/breadthFirstSearch/simpleBFS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_10_2000000 :  -r 10 -o /tmp/ofile871761_829473 : '3.917', '3.92', '3.916', '3.916', '3.915', '3.953', '3.915', '3.918', '3.916', '3.924', geomean = 3.921
+rMatGraph_J_12_2250000 :  -r 10 -o /tmp/ofile762936_756966 : '6.684', '6.679', '6.691', '6.708', '6.69', '6.652', '6.682', '6.698', '6.672', '6.659', geomean = 6.681
+3Dgrid_J_8000000 :  -r 10 -o /tmp/ofile934793_390489 : '6.996', '7.038', '6.999', '7.006', '7.003', '6.999', '7.034', '7.006', '6.988', '7.043', geomean = 7.011
+simpleBFS : 1 : geomean of mins = 5.667, geomean of geomeans = 5.684
+
+cd benchmarks/breadthFirstSearch/backForwardBFS ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o BFSTime.o -c ../bench/BFSTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c BFS.C -o BFS.o
+g++ -o BFS BFSTime.o BFS.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/breadthFirstSearch/backForwardBFS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_10_2000000 :  -r 10 -o /tmp/ofile918490_703359 : '0.726', '0.726', '0.725', '0.728', '0.726', '0.728', '0.726', '0.726', '0.726', '0.725', geomean = 0.726
+rMatGraph_J_12_2250000 :  -r 10 -o /tmp/ofile609572_204982 : '1.803', '1.796', '1.831', '1.796', '1.8', '1.8', '1.797', '1.795', '1.797', '1.796', geomean = 1.801
+3Dgrid_J_8000000 :  -r 10 -o /tmp/ofile984105_611956 : '6.878', '6.87', '6.861', '6.895', '6.862', '6.87', '6.895', '6.857', '6.877', '6.857', geomean = 6.872
+backForwardBFS : 1 : geomean of mins = 2.074, geomean of geomeans = 2.079
+
+cd benchmarks/breadthFirstSearch/deterministicBFS ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o BFSTime.o -c ../bench/BFSTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c BFS.C -o BFS.o
+g++ -o BFS BFSTime.o BFS.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/breadthFirstSearch/deterministicBFS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_10_2000000 :  -r 10 -o /tmp/ofile739931_39269 : '4.534', '4.536', '4.546', '4.537', '4.535', '4.537', '4.541', '4.539', '4.539', '4.535', geomean = 4.538
+rMatGraph_J_12_2250000 :  -r 10 -o /tmp/ofile489460_360610 : '7.823', '7.778', '7.782', '7.773', '7.818', '7.763', '7.773', '7.802', '7.781', '7.772', geomean = 7.787
+3Dgrid_J_8000000 :  -r 10 -o /tmp/ofile209280_292375 : '9.845', '9.87', '9.839', '9.862', '9.842', '9.836', '9.851', '9.865', '9.833', '9.867', geomean = 9.851
+deterministicBFS : 1 : geomean of mins = 7.021, geomean of geomeans = 7.034
+
+cd benchmarks/breadthFirstSearch/serialBFS ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o BFSTime.o -c ../bench/BFSTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c BFS.C -o BFS.o
+g++ -o BFS BFSTime.o BFS.o 
+cd benchmarks/breadthFirstSearch/serialBFS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_10_2000000 :  -r 10 -o /tmp/ofile997181_913022 : '3.793', '3.795', '3.791', '3.822', '3.796', '3.787', '3.792', '3.788', '3.792', '3.826', geomean = 3.798
+rMatGraph_J_12_2250000 :  -r 10 -o /tmp/ofile98937_976965 : '6.18', '6.228', '6.179', '6.185', '6.219', '6.194', '6.203', '6.211', '6.173', '6.194', geomean = 6.196
+3Dgrid_J_8000000 :  -r 10 -o /tmp/ofile154931_916742 : '6.6', '6.589', '6.566', '6.597', '6.559', '6.562', '6.564', '6.59', '6.551', '6.598', geomean = 6.577
+serialBFS : 1 : geomean of mins = 5.35, geomean of geomeans = 5.369
+
+cd benchmarks/maximalMatching/serialMatching ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o matchingTime.o -c ../bench/matchingTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c matching.C -o matching.o
+g++ -o matching matchingTime.o matching.o 
+cd benchmarks/maximalMatching/serialMatching ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile932417_612596 : '0.914', '0.914', '0.915', '0.915', '0.915', '0.913', '0.915', '0.915', '0.914', '0.917', geomean = 0.915
+rMatGraph_E_10_2000000 :  -r 10 -o /tmp/ofile591178_348590 : '0.911', '0.909', '0.912', '0.911', '0.91', '0.909', '0.91', '0.908', '0.909', '0.911', geomean = 0.91
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile91189_74946 : '1.411', '1.413', '1.441', '1.421', '1.422', '1.42', '1.417', '1.418', '1.43', '1.411', geomean = 1.42
+serialMatching : 1 : geomean of mins = 1.053, geomean of geomeans = 1.057
+
+cd benchmarks/maximalMatching/incrementalMatching ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o matchingTime.o -c ../bench/matchingTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c matching.C -o matching.o
+g++ -o matching matchingTime.o matching.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/maximalMatching/incrementalMatching ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile559683_320448 : '2.439', '2.449', '2.444', '2.437', '2.438', '2.44', '2.441', '2.437', '2.438', '2.437', geomean = 2.44
+rMatGraph_E_10_2000000 :  -r 10 -o /tmp/ofile200330_554189 : '2.482', '2.475', '2.481', '2.482', '2.479', '2.481', '2.479', '2.517', '2.481', '2.482', geomean = 2.484
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile326803_498393 : '4.939', '4.95', '4.951', '4.944', '4.953', '4.95', '4.994', '4.943', '4.951', '4.939', geomean = 4.952
+incrementalMatching : 1 : geomean of mins = 3.1, geomean of geomeans = 3.108
+
+cd benchmarks/maximalIndependentSet/incrementalMIS ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o MISTime.o -c ../bench/MISTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c MIS.C -o MIS.o
+g++ -o MIS MISTime.o MIS.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/maximalIndependentSet/incrementalMIS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_5_4000000 :  -r 10 -o /tmp/ofile423371_746737 : '1.685', '1.684', '1.685', '1.684', '1.685', '1.685', '1.685', '1.684', '1.685', '1.686', geomean = 1.685
+rMatGraph_J_5_4000000 :  -r 10 -o /tmp/ofile751674_534675 : '1.629', '1.627', '1.625', '1.624', '1.626', '1.625', '1.66', '1.625', '1.625', '1.625', geomean = 1.629
+3Dgrid_J_6640000 :  -r 10 -o /tmp/ofile303616_50646 : '12.701', '12.669', '12.664', '12.696', '12.662', '12.701', '12.666', '12.665', '12.697', '12.664', geomean = 12.678
+incrementalMIS : 1 : geomean of mins = 3.259, geomean of geomeans = 3.265
+
+cd benchmarks/maximalIndependentSet/ndMIS ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o MISTime.o -c ../bench/MISTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c MIS.C -o MIS.o
+g++ -o MIS MISTime.o MIS.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/maximalIndependentSet/ndMIS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_5_4000000 :  -r 10 -o /tmp/ofile721059_932458 : '2.287', '2.287', '2.287', '2.322', '2.287', '2.286', '2.288', '2.288', '2.288', '2.292', geomean = 2.291
+rMatGraph_J_5_4000000 :  -r 10 -o /tmp/ofile321443_622566 : '2.187', '2.181', '2.18', '2.181', '2.192', '2.185', '2.184', '2.183', '2.184', '2.218', geomean = 2.187
+3Dgrid_J_6640000 :  -r 10 -o /tmp/ofile859366_420277 : '5.283', '5.317', '5.284', '5.282', '5.285', '5.315', '5.283', '5.283', '5.287', '5.282', geomean = 5.29
+ndMIS : 1 : geomean of mins = 2.975, geomean of geomeans = 2.982
+
+cd benchmarks/maximalIndependentSet/serialMIS ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o MISTime.o -c ../bench/MISTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c MIS.C -o MIS.o
+g++ -o MIS MISTime.o MIS.o 
+cd benchmarks/maximalIndependentSet/serialMIS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_5_4000000 :  -r 10 -o /tmp/ofile310241_278289 : '1.649', '1.653', '1.648', '1.647', '1.649', '1.649', '1.653', '1.647', '1.649', '1.648', geomean = 1.649
+rMatGraph_J_5_4000000 :  -r 10 -o /tmp/ofile104081_441912 : '1.499', '1.497', '1.497', '1.532', '1.498', '1.497', '1.497', '1.497', '1.498', '1.497', geomean = 1.501
+3Dgrid_J_6640000 :  -r 10 -o /tmp/ofile150688_785193 : '2.961', '2.929', '2.924', '2.925', '2.927', '2.924', '2.924', '2.959', '2.926', '2.929', geomean = 2.933
+serialMIS : 1 : geomean of mins = 1.932, geomean of geomeans = 1.936
+
+cd benchmarks/nearestNeighbors/octTree ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -include neighbors.h -o neighbors ../bench/neighborsTime.C -DHOMEGROWN -pthread -ldl 
+cd ../bench; make -s neighborsCheck
+cd benchmarks/nearestNeighbors/octTree ; ./testInputs_small -r 10 -p 1
+2DinCube_1000000 : -d 2 -k 1 -r 10 -o /tmp/ofile935509_989767 : '2.081', '2.074', '2.082', '2.073', '2.108', '2.073', '2.087', '2.075', '2.082', '2.074', geomean = 2.081
+2Dkuzmin_1000000 : -d 2 -k 1 -r 10 -o /tmp/ofile193209_153112 : '2.319', '2.31', '2.317', '2.309', '2.317', '2.352', '2.32', '2.32', '2.323', '2.314', geomean = 2.32
+3DinCube_1000000 : -d 3 -k 1 -r 10 -o /tmp/ofile173563_441688 : '3.35', '3.348', '3.371', '3.344', '3.353', '3.39', '3.349', '3.341', '3.35', '3.339', geomean = 3.353
+3DonSphere_1000000 : -d 3 -k 1 -r 10 -o /tmp/ofile138174_380746 : '2.207', '2.198', '2.208', '2.197', '2.206', '2.24', '2.206', '2.198', '2.204', '2.199', geomean = 2.206
+3DinCube_1000000 : -d 3 -k 10 -r 10 -o /tmp/ofile564070_535368 : '9.005', '9.041', '9.017', '9.005', '9.012', '9.041', '9.007', '9.036', '9.019', '9.005', geomean = 9.019
+3Dplummer_1000000 : -d 3 -k 10 -r 10 -o /tmp/ofile643963_521058 : '14.415', '14.454', '14.429', '14.418', '14.448', '14.41', '14.446', '14.452', '14.42', '14.41', geomean = 14.43
+octTree : 1 : geomean of mins = 4.072, geomean of geomeans = 4.085
+
+cd benchmarks/rayCast/kdTree ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o rayTime.o -c ../bench/rayTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c ray.C -o ray.o
+g++ -o ray rayTime.o ray.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/rayCast/kdTree ; ./testInputs_small -r 10 -p 1
+angelTriangles angelRays :  -r 10 -o /tmp/ofile260560_259130 : '20.099', '20.105', '20.064', '20.093', '20.106', '20.066', '20.096', '20.078', '20.064', '20.093', geomean = 20.086
+dragonTriangles dragonRays :  -r 10 -o /tmp/ofile693557_814455 : '39.532', '39.572', '39.51', '39.532', '39.546', '39.513', '39.529', '39.565', '39.527', '39.518', geomean = 39.534
+kdTree : 1 : geomean of mins = 28.155, geomean of geomeans = 28.18
+
+cd benchmarks/convexHull/quickHull ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o hullTime.o -c ../bench/hullTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c hull.C -o hull.o
+g++ -o hull hullTime.o hull.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/convexHull/quickHull ; ./testInputs_small -r 10 -p 1
+2DinSphere_10000000 :  -r 10 -o /tmp/ofile205267_36268 : '3.593', '3.594', '3.592', '3.595', '3.607', '3.595', '3.595', '3.594', '3.595', '3.601', geomean = 3.596
+2Dkuzmin_10000000 :  -r 10 -o /tmp/ofile935713_612140 : '2.714', '2.708', '2.71', '2.711', '2.712', '2.708', '2.71', '2.753', '2.71', '2.708', geomean = 2.714
+2DonSphere_10000000 :  -r 10 -o /tmp/ofile549009_907121 : '43.38', '43.355', '43.418', '43.394', '43.368', '43.371', '43.404', '43.37', '43.421', '43.367', geomean = 43.385
+quickHull : 1 : geomean of mins = 7.499, geomean of geomeans = 7.51
+
+cd benchmarks/convexHull/serialHull ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -o hullTime.o -c ../bench/hullTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG   -c hull.C -o hull.o
+g++ -o hull hullTime.o hull.o 
+cd benchmarks/convexHull/serialHull ; ./testInputs_small -r 10 -p 1
+2DinSphere_10000000 :  -r 10 -o /tmp/ofile618614_692520 : '1.86', '1.824', '1.822', '1.822', '1.821', '1.821', '1.822', '1.828', '1.823', '1.821', geomean = 1.827
+2Dkuzmin_10000000 :  -r 10 -o /tmp/ofile113657_424066 : '1.355', '1.356', '1.355', '1.356', '1.356', '1.355', '1.356', '1.355', '1.355', '1.356', geomean = 1.355
+2DonSphere_10000000 :  -r 10 -o /tmp/ofile351291_464525 : '17.617', '17.623', '17.597', '17.61', '17.61', '17.595', '17.588', '17.614', '17.632', '17.588', geomean = 17.607
+serialHull : 1 : geomean of mins = 3.515, geomean of geomeans = 3.52
+
+cd benchmarks/delaunayTriangulation/incrementalDelaunay ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o delaunayTime.o -c ../bench/delaunayTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c delaunay.C -o delaunay.o
+g++ -o delaunay delaunayTime.o delaunay.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/delaunayTriangulation/incrementalDelaunay ; ./testInputs_small -r 10 -p 1
+2DinCube_1000000 :  -r 10 -o /tmp/ofile320802_183191 : '7.15', '7.115', '7.115', '7.151', '7.126', '7.118', '7.133', '7.12', '7.111', '7.156', geomean = 7.129
+2Dkuzmin_1000000 :  -r 10 -o /tmp/ofile370080_409193 : '11.159', '11.207', '11.168', '11.216', '11.167', '11.165', '11.201', '11.161', '11.2', '11.173', geomean = 11.182
+incrementalDelaunay : 1 : geomean of mins = 8.908, geomean of geomeans = 8.929
+
+cd benchmarks/delaunayRefine/incrementalRefine ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o refineTime.o -c ../bench/refineTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c refine.C -o refine.o
+g++ -o refine refineTime.o refine.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/delaunayRefine/incrementalRefine ; ./testInputs_small -r 10 -p 1
+2DinCubeDelaunay_500000 :  -r 10 -o /tmp/ofile294859_250256 : '12.901', '12.931', '12.89', '12.923', '12.884', '12.932', '12.899', '12.927', '12.886', '12.935', geomean = 12.911
+2DkuzminDelaunay_500000 :  -r 10 -o /tmp/ofile798458_310228 : '11.709', '11.663', '11.699', '11.682', '11.676', '11.709', '11.659', '11.701', '11.684', '11.68', geomean = 11.686
+incrementalRefine : 1 : geomean of mins = 12.256, geomean of geomeans = 12.283
+
+cd benchmarks/rangeQuery2d/parallelPlaneSweep ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o rangeTime.o -c ../bench/rangeTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c range.C -o range.o
+g++ -o range rangeTime.o range.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/rangeQuery2d/parallelPlaneSweep ; ./testInputs_small -r 10 -p 1
+2DinCube_1000000 :  -r 10 -o /tmp/ofile976017_893967 : '3.861', '3.831', '3.832', '3.83', '3.83', '3.872', '3.832', '3.834', '3.833', '3.828', geomean = 3.838
+2Dkuzmin_1000000 :  -r 10 -o /tmp/ofile599628_56792 : '3.86', '3.831', '3.831', '3.832', '3.834', '3.833', '3.836', '3.869', '3.832', '3.83', geomean = 3.839
+parallelPlaneSweep : 1 : geomean of mins = 3.829, geomean of geomeans = 3.838
+
+cd benchmarks/rangeQuery2d/serial ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o rangeTime.o -c ../bench/rangeTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c range.C -o range.o
+g++ -o range rangeTime.o range.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/rangeQuery2d/serial ; ./testInputs_small -r 10 -p 1
+2DinCube_1000000 :  -r 10 -o /tmp/ofile909653_55625 : '3.855', '3.833', '3.835', '3.829', '3.841', '3.827', '3.831', '3.865', '3.828', '3.829', geomean = 3.837
+2Dkuzmin_1000000 :  -r 10 -o /tmp/ofile594129_214290 : '3.894', '3.834', '3.836', '3.837', '3.843', '3.838', '3.842', '3.835', '3.834', '3.876', geomean = 3.847
+serial : 1 : geomean of mins = 3.831, geomean of geomeans = 3.842
+
+cd benchmarks/nBody/parallelCK ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o nbodyTime.o -c ../bench/nbodyTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c nbody.C -o nbody.o
+g++ -o nbody nbodyTime.o nbody.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/nBody/parallelCK ; ./testInputs_small -r 10 -p 1
+3DonSphere_100000 :  -r 10 -o /tmp/ofile635812_929115 : '8.659', '8.665', '8.646', '8.662', '8.66', '8.693', '8.649', '8.648', '8.69', '8.659', geomean = 8.663
+3DinCube_100000 :  -r 10 -o /tmp/ofile714443_630902 : '17.887', '17.853', '17.897', '17.889', '17.905', '17.873', '17.864', '17.915', '17.904', '17.861', geomean = 17.885
+3Dplummer_100000 :  -r 10 -o /tmp/ofile371136_726869 : '44.169', '44.13', '44.153', '44.12', '44.172', '44.143', '44.118', '44.174', '44.169', '44.116', geomean = 44.146
+parallelCK : 1 : geomean of mins = 18.954, geomean of geomeans = 18.982
+
+cd benchmarks/BWDecode/listRank ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -o bwTime.o -c ../bench/bwTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .   -c bw.C -o bw.o
+g++ -o bw bwTime.o bw.o -DHOMEGROWN -pthread -ldl 
+cd benchmarks/BWDecode/listRank ; ./testInputs_small -r 10 -p 1
+trigramString_25000000 :  -r 10 -o /tmp/ofile110547_963571 : '4.925', '4.926', '4.962', '4.92', '4.919', '4.914', '4.955', '4.915', '4.923', '4.926', geomean = 4.929
+chr22.dna :  -r 10 -o /tmp/ofile208310_441204 : '6.856', '6.865', '6.858', '6.864', '6.902', '6.859', '6.864', '6.893', '6.859', '6.858', geomean = 6.868
+wikisamp.xml :  -r 10 -o /tmp/ofile784756_695744 : '18.041', '18.09', '18.053', '18.08', '18.087', '18.065', '18.082', '18.072', '18.048', '18.067', geomean = 18.068
+listRank : 1 : geomean of mins = 8.471, geomean of geomeans = 8.488
+Small Inputs

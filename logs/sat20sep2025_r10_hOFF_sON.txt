@@ -1,0 +1,369 @@
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/integerSort/parallelRadixSort ; make   
+cd ../bench; make -s isortCheck
+cd benchmarks/integerSort/parallelRadixSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int : -b 24 -r 10 -o /tmp/ofile606786_8778 : '1.277', '1.277', '1.277', '1.276', '1.278', '1.276', '1.277', '1.276', '1.277', '1.276', geomean = 1.277
+exptSeq_10M_int : -b 24 -r 10 -o /tmp/ofile407462_387615 : '1.297', '1.298', '1.297', '1.296', '1.298', '1.297', '1.296', '1.336', '1.297', '1.296', geomean = 1.301
+randomSeq_10M_int_pair_int : -b 24 -r 10 -o /tmp/ofile355119_746912 : '1.285', '1.286', '1.285', '1.287', '1.286', '1.325', '1.287', '1.287', '1.287', '1.285', geomean = 1.29
+randomSeq_10M_256_int_pair_int : -b 8 -r 10 -o /tmp/ofile252823_795641 : '0.436', '0.438', '0.436', '0.437', '0.436', '0.436', '0.437', '0.436', '0.436', '0.474', geomean = 0.44
+parallelRadixSort : 1 : geomean of mins = 0.981, geomean of geomeans = 0.985
+
+cd benchmarks/integerSort/serialRadixSort ; make   
+cd ../bench; make -s isortCheck
+cd benchmarks/integerSort/serialRadixSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int : -b 24 -r 10 -o /tmp/ofile251127_820192 : '1.261', '1.262', '1.262', '1.261', '1.259', '1.263', '1.261', '1.262', '1.263', '1.261', geomean = 1.261
+exptSeq_10M_int : -b 24 -r 10 -o /tmp/ofile246919_664757 : '1.259', '1.26', '1.299', '1.258', '1.261', '1.262', '1.26', '1.259', '1.258', '1.26', geomean = 1.263
+randomSeq_10M_int_pair_int : -b 24 -r 10 -o /tmp/ofile862720_539048 : '1.314', '1.275', '1.273', '1.275', '1.275', '1.273', '1.274', '1.273', '1.272', '1.274', geomean = 1.278
+randomSeq_10M_256_int_pair_int : -b 8 -r 10 -o /tmp/ofile165281_107517 : '0.433', '0.432', '0.434', '0.433', '0.433', '0.433', '0.433', '0.432', '0.433', '0.433', geomean = 0.433
+serialRadixSort : 1 : geomean of mins = 0.966, geomean of geomeans = 0.969
+
+cd benchmarks/comparisonSort/quickSort ; make   
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/quickSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile807501_335302 : '1.568', '1.53', '1.53', '1.531', '1.53', '1.528', '1.529', '1.529', '1.529', '1.53', geomean = 1.533
+exptSeq_10M_double :  -r 10 -o /tmp/ofile355505_519201 : '1.062', '1.062', '1.063', '1.063', '1.062', '1.063', '1.063', '1.062', '1.063', '1.062', geomean = 1.062
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile982046_23970 : '0.72', '0.721', '0.765', '0.721', '0.722', '0.721', '0.72', '0.72', '0.721', '0.72', geomean = 0.725
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile765421_531286 : '2.482', '2.442', '2.44', '2.438', '2.479', '2.443', '2.441', '2.441', '2.441', '2.442', geomean = 2.449
+trigramSeq_10M :  -r 10 -o /tmp/ofile524278_435539 : '5.559', '5.565', '5.574', '5.571', '5.568', '5.614', '5.572', '5.565', '5.569', '5.609', geomean = 5.577
+quickSort : 1 : geomean of mins = 1.738, geomean of geomeans = 1.744
+
+cd benchmarks/comparisonSort/mergeSort ; make   
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/mergeSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile57121_53135 : '3.368', '3.372', '3.368', '3.405', '3.367', '3.368', '3.369', '3.37', '3.369', '3.407', geomean = 3.376
+exptSeq_10M_double :  -r 10 -o /tmp/ofile673062_89835 : '3.085', '3.084', '3.083', '3.11', '3.087', '3.087', '3.088', '3.087', '3.087', '3.125', geomean = 3.092
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile847559_957533 : '1.594', '1.595', '1.597', '1.594', '1.594', '1.595', '1.639', '1.599', '1.595', '1.601', geomean = 1.6
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile825396_998775 : '4.137', '4.139', '4.141', '4.184', '4.142', '4.141', '4.144', '4.151', '4.139', '4.139', geomean = 4.146
+trigramSeq_10M :  -r 10 -o /tmp/ofile231079_102248 : '9.638', '9.649', '9.643', '9.644', '9.646', '9.687', '9.653', '9.646', '9.683', '9.648', geomean = 9.654
+mergeSort : 1 : geomean of mins = 3.663, geomean of geomeans = 3.673
+
+cd benchmarks/comparisonSort/stableSampleSort ; make   
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/stableSampleSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile859017_885466 : '2.718', '2.705', '2.698', '2.698', '2.698', '2.697', '2.698', '2.698', '2.698', '2.738', geomean = 2.705
+exptSeq_10M_double :  -r 10 -o /tmp/ofile868112_264107 : '2.392', '2.372', '2.371', '2.372', '2.377', '2.371', '2.37', '2.371', '2.373', '2.371', geomean = 2.374
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile571693_797989 : '1.549', '1.549', '1.59', '1.548', '1.548', '1.549', '1.548', '1.548', '1.547', '1.549', geomean = 1.552
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile876844_792020 : '3.875', '3.821', '3.818', '3.822', '3.821', '3.821', '3.862', '3.82', '3.821', '3.823', geomean = 3.83
+trigramSeq_10M :  -r 10 -o /tmp/ofile690269_13780 : '10.129', '10.04', '10.086', '10.042', '10.048', '10.048', '10.109', '10.037', '10.084', '10.043', geomean = 10.067
+stableSampleSort : 1 : geomean of mins = 3.279, geomean of geomeans = 3.288
+
+cd benchmarks/comparisonSort/serialSort ; make   
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/serialSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile265556_790988 : '1.606', '1.569', '1.566', '1.568', '1.569', '1.563', '1.567', '1.567', '1.569', '1.568', geomean = 1.571
+exptSeq_10M_double :  -r 10 -o /tmp/ofile347157_940593 : '1.362', '1.364', '1.365', '1.363', '1.361', '1.362', '1.364', '1.364', '1.363', '1.361', geomean = 1.363
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile695186_325326 : '0.664', '0.664', '0.667', '0.666', '0.665', '0.664', '0.664', '0.664', '0.664', '0.667', geomean = 0.665
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile746770_612631 : '2.334', '2.332', '2.334', '2.332', '2.34', '2.332', '2.334', '2.334', '2.34', '2.333', geomean = 2.334
+trigramSeq_10M :  -r 10 -o /tmp/ofile626343_22627 : '8.997', '9.', '8.993', '9.032', '8.995', '9.027', '8.992', '8.992', '9.003', '9.026', geomean = 9.005
+serialSort : 1 : geomean of mins = 1.969, geomean of geomeans = 1.974
+
+cd benchmarks/removeDuplicates/serial_hash ; make   
+cd ../bench; make -s dedupCheck
+cd benchmarks/removeDuplicates/serial_hash ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int :  -r 10 -o /tmp/ofile526012_885715 : '2.586', '2.487', '2.484', '2.488', '2.485', '2.486', '2.487', '2.486', '2.485', '2.494', geomean = 2.497
+exptSeq_10M_int :  -r 10 -o /tmp/ofile567747_96674 : '1.442', '1.427', '1.44', '1.444', '1.443', '1.444', '1.44', '1.443', '1.442', '1.441', geomean = 1.44
+trigramSeq_10M :  -r 10 -o /tmp/ofile999664_278208 : '2.289', '2.272', '2.292', '2.293', '2.294', '2.294', '2.293', '2.301', '2.33', '2.296', geomean = 2.295
+serial_hash : 1 : geomean of mins = 2.005, geomean of geomeans = 2.021
+
+cd benchmarks/removeDuplicates/serial_sort ; make   
+cd ../bench; make -s dedupCheck
+cd benchmarks/removeDuplicates/serial_sort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int :  -r 10 -o /tmp/ofile985929_44116 : '1.484', '1.484', '1.486', '1.477', '1.482', '1.479', '1.48', '1.482', '1.479', '1.482', geomean = 1.481
+exptSeq_10M_int :  -r 10 -o /tmp/ofile450911_10639 : '1.253', '1.254', '1.257', '1.252', '1.252', '1.29', '1.256', '1.252', '1.255', '1.252', geomean = 1.257
+trigramSeq_10M :  -r 10 -o /tmp/ofile565315_806360 : '10.437', '10.439', '10.478', '10.446', '10.441', '10.475', '10.44', '10.474', '10.444', '10.446', geomean = 10.452
+serial_sort : 1 : geomean of mins = 2.682, geomean of geomeans = 2.69
+
+cd benchmarks/removeDuplicates/parlayhash ; make   
+cd ../bench; make -s dedupCheck
+cd benchmarks/removeDuplicates/parlayhash ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_int :  -r 10 -o /tmp/ofile948567_14085 : '0.917', '0.916', '0.917', '0.916', '0.916', '0.916', '0.915', '0.917', '0.917', '0.918', geomean = 0.916
+exptSeq_10M_int :  -r 10 -o /tmp/ofile679475_957503 : '0.819', '0.819', '0.819', '0.819', '0.819', '0.819', '0.819', '0.818', '0.818', '0.857', geomean = 0.822
+trigramSeq_10M :  -r 10 -o /tmp/ofile80047_554425 : '3.234', '3.231', '3.232', '3.232', '3.24', '3.233', '3.234', '3.232', '3.232', '3.233', geomean = 3.233
+parlayhash : 1 : geomean of mins = 1.343, geomean of geomeans = 1.346
+
+cd benchmarks/histogram/sequential ; make   
+make: 'histogram' is up to date.
+cd benchmarks/histogram/sequential ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_256_int : -b 256 -r 10 -o /tmp/ofile481338_318861 : '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', geomean = 0.116
+randomSeq_10M_100K_int : -b 100000 -r 10 -o /tmp/ofile219327_604493 : '0.116', '0.116', '0.116', '0.116', '0.116', '0.116', '0.117', '0.117', '0.116', '0.116', geomean = 0.116
+randomSeq_10M_int : -b 10000000 -r 10 -o /tmp/ofile584721_346045 : '0.354', '0.353', '0.355', '0.39', '0.354', '0.354', '0.354', '0.355', '0.354', '0.354', geomean = 0.358
+exptSeq_10M_int : -b 10000000 -r 10 -o /tmp/ofile139066_119089 : '0.289', '0.289', '0.289', '0.29', '0.289', '0.29', '0.29', '0.289', '0.29', '0.289', geomean = 0.289
+almostEqualSeq_10M : -b 10000000 -r 10 -o /tmp/ofile851165_368522 : '0.094', '0.094', '0.094', '0.094', '0.094', '0.094', '0.094', '0.094', '0.094', '0.094', geomean = 0.094
+histogram_sequential : 1 : geomean of mins = 0.167, geomean of geomeans = 0.167
+
+cd benchmarks/histogram/parallel ; make   
+make: 'histogram' is up to date.
+cd benchmarks/histogram/parallel ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_256_int : -b 256 -r 10 -o /tmp/ofile158088_231234 : '0.392', '0.392', '0.392', '0.392', '0.392', '0.392', '0.392', '0.392', '0.392', '0.392', geomean = 0.392
+randomSeq_10M_100K_int : -b 100000 -r 10 -o /tmp/ofile479465_914530 : '0.583', '0.582', '0.582', '0.582', '0.583', '0.582', '0.582', '0.587', '0.582', '0.582', geomean = 0.583
+randomSeq_10M_int : -b 10000000 -r 10 -o /tmp/ofile963242_892094 : '0.69', '0.689', '0.69', '0.69', '0.69', '0.689', '0.69', '0.69', '0.689', '0.689', geomean = 0.69
+exptSeq_10M_int : -b 10000000 -r 10 -o /tmp/ofile128840_689422 : '0.705', '0.703', '0.702', '0.703', '0.701', '0.703', '0.701', '0.701', '0.703', '0.702', geomean = 0.703
+almostEqualSeq_10M : -b 10000000 -r 10 -o /tmp/ofile461110_686308 : '0.08', '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', '0.079', geomean = 0.079
+histogram_parallel : 1 : geomean of mins = 0.387, geomean of geomeans = 0.388
+
+cd benchmarks/wordCounts/histogram ; make   
+make: 'wc' is up to date.
+cd benchmarks/wordCounts/histogram ; ./testInputs_small -r 10 -p 1
+trigramString_25000000 :  -r 10 -o /tmp/ofile354460_130746 : '6.528', '6.571', '6.529', '6.534', '6.529', '6.533', '6.529', '6.574', '6.535', '6.532', geomean = 6.539
+wikisamp.xml :  -r 10 -o /tmp/ofile765895_640217 : '24.097', '24.02', '24.037', '24.07', '24.041', '24.09', '24.08', '24.097', '24.076', '24.048', geomean = 24.066
+histogram_wordCounts: 1 : geomean of mins = 12.522, geomean of geomeans = 12.545
+
+cd benchmarks/wordCounts/histogramStar ; make   
+make: 'wc' is up to date.
+cd benchmarks/wordCounts/histogramStar ; ./testInputs_small -r 10 -p 1
+trigramString_25000000 :  -r 10 -o /tmp/ofile657414_154920 : '5.664', '5.663', '5.706', '5.651', '5.646', '5.658', '5.649', '5.652', '5.651', '5.699', geomean = 5.664
+wikisamp.xml :  -r 10 -o /tmp/ofile329646_384574 : '20.467', '20.461', '20.42', '20.463', '20.465', '20.439', '20.464', '20.466', '20.421', '20.447', geomean = 20.451
+histogramStar_wordCounts : 1 : geomean of mins = 10.738, geomean of geomeans = 10.763
+
+cd benchmarks/wordCounts/serial ; make   
+make: 'wc' is up to date.
+cd benchmarks/wordCounts/serial ; ./testInputs_small -r 10 -p 1
+trigramString_25000000 :  -r 10 -o /tmp/ofile257546_599157 : '1.168', '1.154', '1.155', '1.148', '1.156', '1.153', '1.154', '1.191', '1.154', '1.155', geomean = 1.159
+wikisamp.xml :  -r 10 -o /tmp/ofile776853_118329 : '2.721', '2.715', '2.711', '2.713', '2.714', '2.713', '2.745', '2.71', '2.713', '2.716', geomean = 2.717
+serial_wordCounts : 1 : geomean of mins = 1.764, geomean of geomeans = 1.774
+
+cd benchmarks/invertedIndex/sequential ; make   
+make: 'index' is up to date.
+cd benchmarks/invertedIndex/sequential ; ./testInputs_small -r 10 -p 1
+wikisamp.xml :  -r 10 -o /tmp/ofile597381_762052 : '5.409', '5.374', '5.377', '5.371', '5.376', '5.377', '5.377', '5.409', '5.377', '5.375', geomean = 5.382
+invertedIndex_sequential : 1 : geomean of mins = 5.371, geomean of geomeans = 5.382
+
+cd benchmarks/invertedIndex/parallel ; make   
+make: 'index' is up to date.
+cd benchmarks/invertedIndex/parallel ; ./testInputs_small -r 10 -p 1
+wikisamp.xml :  -r 10 -o /tmp/ofile854483_618199 : '22.361', '22.355', '22.324', '22.354', '22.354', '22.321', '22.357', '22.363', '22.326', '22.358', geomean = 22.347
+invertedIndex_parallel : 1 : geomean of mins = 22.321, geomean of geomeans = 22.347
+
+cd benchmarks/suffixArray/parallelKS ; make   
+make: 'SA' is up to date.
+cd benchmarks/suffixArray/parallelKS ; ./testInputs_small -r 10 -p 1
+trigramString_10000000 :  -r 10 -o /tmp/ofile901472_775762 : '11.561', '11.535', '11.553', '11.531', '11.552', '11.504', '11.554', '11.535', '11.553', '11.539', geomean = 11.542
+chr22.dna :  -r 10 -o /tmp/ofile363881_272144 : '57.174', '57.086', '57.27', '56.919', '57.318', '57.085', '57.128', '57.106', '57.273', '56.948', geomean = 57.13
+parallelKS : 1 : geomean of mins = 25.589, geomean of geomeans = 25.678
+
+cd benchmarks/suffixArray/parallelRange ; make   
+make: 'SA' is up to date.
+cd benchmarks/suffixArray/parallelRange ; ./testInputs_small -r 10 -p 1
+trigramString_10000000 :  -r 10 -o /tmp/ofile294822_729817 : '7.435', '7.439', '7.403', '7.401', '7.437', '7.401', '7.397', '7.401', '7.44', '7.4', geomean = 7.415
+chr22.dna :  -r 10 -o /tmp/ofile204092_435067 : '36.088', '36.123', '36.089', '36.078', '36.094', '36.091', '36.116', '36.087', '36.101', '36.074', geomean = 36.094
+parallelRange : 1 : geomean of mins = 16.335, geomean of geomeans = 16.36
+
+cd benchmarks/suffixArray/serialDivsufsort ; make   
+make: 'SA' is up to date.
+cd benchmarks/suffixArray/serialDivsufsort ; ./testInputs_small -r 10 -p 1
+trigramString_10000000 :  -r 10 -o /tmp/ofile472558_318865 : '0.851', '0.849', '0.85', '0.849', '0.85', '0.85', '0.851', '0.851', '0.851', '0.849', geomean = 0.85
+chr22.dna :  -r 10 -o /tmp/ofile101494_433836 : '3.275', '3.312', '3.277', '3.278', '3.281', '3.276', '3.284', '3.278', '3.28', '3.278', geomean = 3.282
+serialDivsufsort : 1 : geomean of mins = 1.667, geomean of geomeans = 1.67
+
+cd benchmarks/longestRepeatedSubstring/doubling ; make   
+make: 'lrs' is up to date.
+cd benchmarks/longestRepeatedSubstring/doubling ; ./testInputs_small -r 10 -p 1
+chr22.dna :  -r 10 -o /tmp/ofile815107_654371 : '51.491', '51.512', '51.535', '51.556', '51.519', '51.506', '51.554', '51.53', '51.487', '51.541', geomean = 51.523
+doubling : 1 : geomean of mins = 51.487, geomean of geomeans = 51.523
+
+cd benchmarks/classify/decisionTree ; make   
+make: 'classify' is up to date.
+cd benchmarks/classify/decisionTree ; ./testInputs_small -r 10 -p 1
+covtype.data :  -r 10 -o /tmp/ofile587535_365781 : '164.877', '164.864', '164.826', '164.811', '164.904', '164.868', '164.834', '164.833', '164.869', '164.851', geomean = 164.854
+decisionTree : 1 : geomean of mins = 164.811, geomean of geomeans = 164.854
+
+cd benchmarks/minSpanningForest/parallelKruskal ; make   
+make: 'MST' is up to date.
+cd benchmarks/minSpanningForest/parallelKruskal ; ./testInputs_small -r 10 -p 1
+randLocalGraph_WE_10_2000000 :  -r 10 -o /tmp/ofile642924_648184 : '12.123', '12.156', '12.167', '12.117', '12.189', '12.133', '12.12', '12.196', '12.124', '12.155', geomean = 12.148
+rMatGraph_WE_12_2250000 :  -r 10 -o /tmp/ofile878330_660838 : '16.955', '16.968', '16.93', '16.962', '16.961', '16.937', '16.934', '16.961', '16.96', '16.932', geomean = 16.95
+3Dgrid_WE_8000000 :  -r 10 -o /tmp/ofile444583_512192 : '19.733', '19.707', '19.741', '19.754', '19.708', '19.731', '19.731', '19.708', '19.733', '19.734', geomean = 19.728
+parallelKruskal : 1 : geomean of mins = 15.93, geomean of geomeans = 15.956
+
+cd benchmarks/minSpanningForest/parallelFilterKruskal ; make   
+make: 'MST' is up to date.
+cd benchmarks/minSpanningForest/parallelFilterKruskal ; ./testInputs_small -r 10 -p 1
+randLocalGraph_WE_10_2000000 :  -r 10 -o /tmp/ofile483333_970768 : '9.648', '9.613', '9.608', '9.613', '9.652', '9.599', '9.607', '9.657', '9.607', '9.613', geomean = 9.622
+rMatGraph_WE_12_2250000 :  -r 10 -o /tmp/ofile873903_901531 : '13.68', '13.633', '13.684', '13.639', '13.675', '13.625', '13.677', '13.652', '13.648', '13.66', geomean = 13.657
+3Dgrid_WE_8000000 :  -r 10 -o /tmp/ofile545588_82704 : '19.701', '19.73', '19.729', '19.733', '19.727', '19.724', '19.713', '19.755', '19.711', '19.678', geomean = 19.72
+parallelFilterKruskal : 1 : geomean of mins = 13.704, geomean of geomeans = 13.735
+
+cd benchmarks/minSpanningForest/serialMST ; make   
+make: 'MST' is up to date.
+cd benchmarks/minSpanningForest/serialMST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_WE_10_2000000 :  -r 10 -o /tmp/ofile76651_259138 : '5.029', '5.036', '5.034', '5.028', '5.03', '5.028', '5.066', '5.03', '5.029', '5.031', geomean = 5.034
+rMatGraph_WE_12_2250000 :  -r 10 -o /tmp/ofile759824_177229 : '7.45', '7.376', '7.427', '7.383', '7.424', '7.432', '7.411', '7.381', '7.457', '7.386', geomean = 7.412
+3Dgrid_WE_8000000 :  -r 10 -o /tmp/ofile856167_216847 : '9.445', '9.441', '9.46', '9.43', '9.483', '9.433', '9.443', '9.443', '9.474', '9.441', geomean = 9.449
+serialMST : 1 : geomean of mins = 7.045, geomean of geomeans = 7.065
+
+cd benchmarks/spanningForest/incrementalST ; make   
+make: 'ST' is up to date.
+cd benchmarks/spanningForest/incrementalST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile786229_78163 : '4.215', '4.223', '4.217', '4.214', '4.262', '4.226', '4.219', '4.223', '4.224', '4.214', geomean = 4.224
+rMatGraph_E_12_2250000 :  -r 10 -o /tmp/ofile463453_899765 : '6.588', '6.631', '6.6', '6.587', '6.625', '6.592', '6.586', '6.594', '6.638', '6.594', geomean = 6.603
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile438163_361925 : '9.13', '9.123', '9.137', '9.161', '9.131', '9.16', '9.129', '9.158', '9.128', '9.124', geomean = 9.138
+incrementalST : 1 : geomean of mins = 6.326, geomean of geomeans = 6.34
+
+cd benchmarks/spanningForest/ndST ; make   
+make: 'ST' is up to date.
+cd benchmarks/spanningForest/ndST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile815212_399724 : '2.53', '2.523', '2.526', '2.528', '2.523', '2.523', '2.53', '2.562', '2.524', '2.526', geomean = 2.53
+rMatGraph_E_12_2250000 :  -r 10 -o /tmp/ofile650520_329257 : '3.914', '3.952', '3.924', '3.916', '3.908', '3.905', '3.909', '3.956', '3.918', '3.921', geomean = 3.922
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile530673_214355 : '5.826', '5.789', '5.847', '5.823', '5.802', '5.809', '5.87', '5.81', '5.813', '5.818', geomean = 5.821
+ndST : 1 : geomean of mins = 3.849, geomean of geomeans = 3.865
+
+cd benchmarks/spanningForest/serialST ; make   
+make: 'ST' is up to date.
+cd benchmarks/spanningForest/serialST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile831490_315958 : '2.42', '2.417', '2.421', '2.42', '2.454', '2.416', '2.42', '2.416', '2.421', '2.421', geomean = 2.422
+rMatGraph_E_12_2250000 :  -r 10 -o /tmp/ofile921681_226477 : '3.499', '3.483', '3.493', '3.505', '3.498', '3.503', '3.529', '3.521', '3.503', '3.502', geomean = 3.503
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile785124_903609 : '5.247', '5.218', '5.23', '5.248', '5.228', '5.212', '5.294', '5.228', '5.213', '5.23', geomean = 5.235
+serialST : 1 : geomean of mins = 3.526, geomean of geomeans = 3.542
+
+cd benchmarks/breadthFirstSearch/simpleBFS ; make   
+make: 'BFS' is up to date.
+cd benchmarks/breadthFirstSearch/simpleBFS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_10_2000000 :  -r 10 -o /tmp/ofile695757_149048 : '3.865', '3.85', '3.864', '3.856', '3.869', '3.851', '3.868', '3.852', '3.865', '3.892', geomean = 3.863
+rMatGraph_J_12_2250000 :  -r 10 -o /tmp/ofile957926_299092 : '6.389', '6.474', '6.388', '6.47', '6.413', '6.468', '6.38', '6.507', '6.372', '6.463', geomean = 6.432
+3Dgrid_J_8000000 :  -r 10 -o /tmp/ofile157504_910410 : '6.647', '6.646', '6.684', '6.642', '6.682', '6.643', '6.641', '6.645', '6.645', '6.644', geomean = 6.652
+simpleBFS : 1 : geomean of mins = 5.462, geomean of geomeans = 5.488
+
+cd benchmarks/breadthFirstSearch/backForwardBFS ; make   
+make: 'BFS' is up to date.
+cd benchmarks/breadthFirstSearch/backForwardBFS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_10_2000000 :  -r 10 -o /tmp/ofile765107_408867 : '0.727', '0.727', '0.726', '0.728', '0.727', '0.727', '0.726', '0.727', '0.726', '0.727', geomean = 0.727
+rMatGraph_J_12_2250000 :  -r 10 -o /tmp/ofile70659_437533 : '1.811', '1.801', '1.803', '1.808', '1.802', '1.803', '1.802', '1.801', '1.803', '1.843', geomean = 1.808
+3Dgrid_J_8000000 :  -r 10 -o /tmp/ofile655819_606873 : '6.359', '6.358', '6.429', '6.362', '6.369', '6.362', '6.356', '6.393', '6.364', '6.353', geomean = 6.37
+backForwardBFS : 1 : geomean of mins = 2.025, geomean of geomeans = 2.031
+
+cd benchmarks/breadthFirstSearch/deterministicBFS ; make   
+make: 'BFS' is up to date.
+cd benchmarks/breadthFirstSearch/deterministicBFS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_10_2000000 :  -r 10 -o /tmp/ofile281494_250486 : '4.441', '4.447', '4.441', '4.445', '4.441', '4.443', '4.48', '4.44', '4.444', '4.445', geomean = 4.446
+rMatGraph_J_12_2250000 :  -r 10 -o /tmp/ofile934599_700613 : '7.473', '7.551', '7.461', '7.502', '7.504', '7.506', '7.47', '7.511', '7.468', '7.545', geomean = 7.499
+3Dgrid_J_8000000 :  -r 10 -o /tmp/ofile127957_882425 : '9.282', '9.241', '9.26', '9.25', '9.295', '9.242', '9.246', '9.27', '9.256', '9.24', geomean = 9.258
+deterministicBFS : 1 : geomean of mins = 6.739, geomean of geomeans = 6.758
+
+cd benchmarks/breadthFirstSearch/serialBFS ; make   
+make: 'BFS' is up to date.
+cd benchmarks/breadthFirstSearch/serialBFS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_10_2000000 :  -r 10 -o /tmp/ofile921677_425140 : '3.717', '3.724', '3.716', '3.723', '3.754', '3.724', '3.717', '3.729', '3.719', '3.724', geomean = 3.725
+rMatGraph_J_12_2250000 :  -r 10 -o /tmp/ofile388707_709953 : '6.028', '5.887', '5.992', '5.889', '6.017', '5.887', '6.008', '5.886', '6.037', '5.885', geomean = 5.951
+3Dgrid_J_8000000 :  -r 10 -o /tmp/ofile821971_817225 : '6.022', '6.028', '6.023', '6.027', '6.062', '6.017', '6.025', '6.023', '6.056', '6.024', geomean = 6.031
+serialBFS : 1 : geomean of mins = 5.086, geomean of geomeans = 5.113
+
+cd benchmarks/maximalMatching/serialMatching ; make   
+make: 'matching' is up to date.
+cd benchmarks/maximalMatching/serialMatching ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile531992_555272 : '0.932', '0.93', '0.93', '0.931', '0.929', '0.931', '0.93', '0.93', '0.93', '0.931', geomean = 0.93
+rMatGraph_E_10_2000000 :  -r 10 -o /tmp/ofile420324_64758 : '0.924', '0.924', '0.923', '0.924', '0.927', '0.924', '0.924', '0.925', '0.925', '0.925', geomean = 0.924
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile108879_482450 : '1.436', '1.432', '1.435', '1.439', '1.437', '1.436', '1.439', '1.435', '1.474', '1.434', geomean = 1.44
+serialMatching : 1 : geomean of mins = 1.071, geomean of geomeans = 1.074
+
+cd benchmarks/maximalMatching/incrementalMatching ; make   
+make: 'matching' is up to date.
+cd benchmarks/maximalMatching/incrementalMatching ; ./testInputs_small -r 10 -p 1
+randLocalGraph_E_10_2000000 :  -r 10 -o /tmp/ofile566148_856755 : '2.435', '2.438', '2.474', '2.438', '2.436', '2.434', '2.435', '2.438', '2.436', '2.436', geomean = 2.44
+rMatGraph_E_10_2000000 :  -r 10 -o /tmp/ofile612714_632141 : '2.476', '2.478', '2.477', '2.475', '2.476', '2.475', '2.51', '2.476', '2.471', '2.474', geomean = 2.479
+3Dgrid_E_8000000 :  -r 10 -o /tmp/ofile814110_119159 : '4.695', '4.696', '4.698', '4.69', '4.694', '4.693', '4.736', '4.688', '4.688', '4.693', geomean = 4.697
+incrementalMatching : 1 : geomean of mins = 3.044, geomean of geomeans = 3.051
+
+cd benchmarks/maximalIndependentSet/incrementalMIS ; make   
+make: 'MIS' is up to date.
+cd benchmarks/maximalIndependentSet/incrementalMIS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_5_4000000 :  -r 10 -o /tmp/ofile668394_520135 : '1.716', '1.678', '1.678', '1.678', '1.678', '1.679', '1.679', '1.679', '1.678', '1.678', geomean = 1.682
+rMatGraph_J_5_4000000 :  -r 10 -o /tmp/ofile531157_849573 : '1.618', '1.623', '1.618', '1.619', '1.618', '1.619', '1.618', '1.618', '1.619', '1.618', geomean = 1.619
+3Dgrid_J_6640000 :  -r 10 -o /tmp/ofile592309_914571 : '12.677', '12.677', '12.641', '12.645', '12.68', '12.643', '12.678', '12.646', '12.642', '12.678', geomean = 12.661
+incrementalMIS : 1 : geomean of mins = 3.25, geomean of geomeans = 3.255
+
+cd benchmarks/maximalIndependentSet/ndMIS ; make   
+make: 'MIS' is up to date.
+cd benchmarks/maximalIndependentSet/ndMIS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_5_4000000 :  -r 10 -o /tmp/ofile378862_158575 : '2.28', '2.319', '2.282', '2.282', '2.293', '2.285', '2.282', '2.281', '2.281', '2.287', geomean = 2.287
+rMatGraph_J_5_4000000 :  -r 10 -o /tmp/ofile522213_353302 : '2.178', '2.175', '2.176', '2.176', '2.176', '2.176', '2.177', '2.182', '2.179', '2.177', geomean = 2.177
+3Dgrid_J_6640000 :  -r 10 -o /tmp/ofile554494_790973 : '5.273', '5.275', '5.274', '5.31', '5.273', '5.273', '5.273', '5.274', '5.31', '5.273', geomean = 5.281
+ndMIS : 1 : geomean of mins = 2.968, geomean of geomeans = 2.974
+
+cd benchmarks/maximalIndependentSet/serialMIS ; make   
+make: 'MIS' is up to date.
+cd benchmarks/maximalIndependentSet/serialMIS ; ./testInputs_small -r 10 -p 1
+randLocalGraph_J_5_4000000 :  -r 10 -o /tmp/ofile873227_837759 : '1.692', '1.653', '1.652', '1.653', '1.652', '1.653', '1.653', '1.652', '1.653', '1.653', geomean = 1.657
+rMatGraph_J_5_4000000 :  -r 10 -o /tmp/ofile557780_888213 : '1.503', '1.503', '1.508', '1.503', '1.502', '1.502', '1.503', '1.503', '1.502', '1.506', geomean = 1.503
+3Dgrid_J_6640000 :  -r 10 -o /tmp/ofile899961_457809 : '2.933', '2.928', '2.927', '2.927', '2.926', '2.928', '2.927', '2.963', '2.928', '2.927', geomean = 2.931
+serialMIS : 1 : geomean of mins = 1.936, geomean of geomeans = 1.94
+
+cd benchmarks/nearestNeighbors/octTree ; make   
+cd ../bench; make -s neighborsCheck
+cd benchmarks/nearestNeighbors/octTree ; ./testInputs_small -r 10 -p 1
+2DinCube_1000000 : -d 2 -k 1 -r 10 -o /tmp/ofile780103_109848 : '2.082', '2.07', '2.074', '2.07', '2.074', '2.072', '2.074', '2.07', '2.074', '2.071', geomean = 2.073
+2Dkuzmin_1000000 : -d 2 -k 1 -r 10 -o /tmp/ofile418198_581859 : '2.288', '2.287', '2.29', '2.287', '2.292', '2.326', '2.29', '2.287', '2.291', '2.288', geomean = 2.293
+3DinCube_1000000 : -d 3 -k 1 -r 10 -o /tmp/ofile141110_292642 : '3.289', '3.284', '3.328', '3.282', '3.289', '3.282', '3.289', '3.282', '3.287', '3.319', geomean = 3.293
+3DonSphere_1000000 : -d 3 -k 1 -r 10 -o /tmp/ofile60342_497142 : '2.166', '2.157', '2.165', '2.158', '2.166', '2.159', '2.166', '2.157', '2.165', '2.157', geomean = 2.161
+3DinCube_1000000 : -d 3 -k 10 -r 10 -o /tmp/ofile627834_554105 : '8.8', '8.801', '8.799', '8.796', '8.839', '8.797', '8.841', '8.793', '8.806', '8.792', geomean = 8.806
+3Dplummer_1000000 : -d 3 -k 10 -r 10 -o /tmp/ofile570977_546822 : '13.662', '13.689', '13.661', '13.695', '13.668', '13.704', '13.662', '13.687', '13.668', '13.645', geomean = 13.674
+octTree : 1 : geomean of mins = 3.987, geomean of geomeans = 3.997
+
+cd benchmarks/rayCast/kdTree ; make   
+make: 'ray' is up to date.
+cd benchmarks/rayCast/kdTree ; ./testInputs_small -r 10 -p 1
+angelTriangles angelRays :  -r 10 -o /tmp/ofile499528_380832 : '20.533', '20.533', '20.496', '20.531', '20.527', '20.502', '20.521', '20.528', '20.499', '20.526', geomean = 20.52
+dragonTriangles dragonRays :  -r 10 -o /tmp/ofile139282_948298 : '40.174', '40.187', '40.131', '40.15', '40.189', '40.163', '40.15', '40.197', '40.141', '40.142', geomean = 40.162
+kdTree : 1 : geomean of mins = 28.68, geomean of geomeans = 28.707
+
+cd benchmarks/convexHull/quickHull ; make   
+make: 'hull' is up to date.
+cd benchmarks/convexHull/quickHull ; ./testInputs_small -r 10 -p 1
+2DinSphere_10000000 :  -r 10 -o /tmp/ofile248685_467034 : '3.579', '3.62', '3.58', '3.579', '3.583', '3.58', '3.578', '3.621', '3.583', '3.58', geomean = 3.588
+2Dkuzmin_10000000 :  -r 10 -o /tmp/ofile554770_871245 : '2.712', '2.716', '2.753', '2.714', '2.714', '2.711', '2.711', '2.711', '2.714', '2.71', geomean = 2.717
+2DonSphere_10000000 :  -r 10 -o /tmp/ofile39477_233975 : '42.216', '42.162', '42.201', '42.164', '42.169', '42.205', '42.166', '42.17', '42.211', '42.153', geomean = 42.182
+quickHull : 1 : geomean of mins = 7.422, geomean of geomeans = 7.437
+
+cd benchmarks/convexHull/serialHull ; make   
+make: 'hull' is up to date.
+cd benchmarks/convexHull/serialHull ; ./testInputs_small -r 10 -p 1
+2DinSphere_10000000 :  -r 10 -o /tmp/ofile970454_467868 : '1.827', '1.828', '1.827', '1.827', '1.866', '1.828', '1.827', '1.826', '1.828', '1.827', geomean = 1.831
+2Dkuzmin_10000000 :  -r 10 -o /tmp/ofile969059_248643 : '1.36', '1.361', '1.36', '1.361', '1.361', '1.366', '1.359', '1.36', '1.36', '1.359', geomean = 1.361
+2DonSphere_10000000 :  -r 10 -o /tmp/ofile31026_750987 : '17.414', '17.403', '17.43', '17.43', '17.4', '17.431', '17.435', '17.4', '17.393', '17.432', geomean = 17.417
+serialHull : 1 : geomean of mins = 3.509, geomean of geomeans = 3.514
+
+cd benchmarks/delaunayTriangulation/incrementalDelaunay ; make   
+make: 'delaunay' is up to date.
+cd benchmarks/delaunayTriangulation/incrementalDelaunay ; ./testInputs_small -r 10 -p 1
+2DinCube_1000000 :  -r 10 -o /tmp/ofile467323_641012 : '6.496', '6.529', '6.494', '6.492', '6.5', '6.502', '6.487', '6.49', '6.534', '6.489', geomean = 6.501
+2Dkuzmin_1000000 :  -r 10 -o /tmp/ofile772319_161213 : '10.439', '10.481', '10.44', '10.486', '10.45', '10.436', '10.482', '10.441', '10.438', '10.483', geomean = 10.458
+incrementalDelaunay : 1 : geomean of mins = 8.228, geomean of geomeans = 8.246
+
+cd benchmarks/delaunayRefine/incrementalRefine ; make   
+make: 'refine' is up to date.
+cd benchmarks/delaunayRefine/incrementalRefine ; ./testInputs_small -r 10 -p 1
+2DinCubeDelaunay_500000 :  -r 10 -o /tmp/ofile773591_376009 : '11.606', '11.565', '11.61', '11.565', '11.577', '11.572', '11.608', '11.61', '11.574', '11.571', geomean = 11.586
+2DkuzminDelaunay_500000 :  -r 10 -o /tmp/ofile992073_677340 : '10.376', '10.404', '10.363', '10.366', '10.404', '10.371', '10.371', '10.405', '10.367', '10.405', geomean = 10.383
+incrementalRefine : 1 : geomean of mins = 10.948, geomean of geomeans = 10.968
+
+cd benchmarks/rangeQuery2d/parallelPlaneSweep ; make   
+make: 'range' is up to date.
+cd benchmarks/rangeQuery2d/parallelPlaneSweep ; ./testInputs_small -r 10 -p 1
+2DinCube_1000000 :  -r 10 -o /tmp/ofile981919_102444 : '3.584', '3.555', '3.554', '3.558', '3.593', '3.56', '3.562', '3.561', '3.567', '3.562', geomean = 3.565
+2Dkuzmin_1000000 :  -r 10 -o /tmp/ofile777856_920922 : '3.593', '3.561', '3.603', '3.562', '3.563', '3.559', '3.563', '3.56', '3.599', '3.564', geomean = 3.573
+parallelPlaneSweep : 1 : geomean of mins = 3.557, geomean of geomeans = 3.569
+
+cd benchmarks/rangeQuery2d/serial ; make   
+make: 'range' is up to date.
+cd benchmarks/rangeQuery2d/serial ; ./testInputs_small -r 10 -p 1
+2DinCube_1000000 :  -r 10 -o /tmp/ofile68235_691611 : '3.584', '3.553', '3.554', '3.554', '3.554', '3.553', '3.594', '3.551', '3.554', '3.553', geomean = 3.56
+2Dkuzmin_1000000 :  -r 10 -o /tmp/ofile729581_122079 : '3.619', '3.554', '3.556', '3.56', '3.564', '3.559', '3.558', '3.56', '3.557', '3.557', geomean = 3.564
+rangeQuery2d_serial : 1 : geomean of mins = 3.552, geomean of geomeans = 3.562
+
+cd benchmarks/nBody/parallelCK ; make   
+make: 'nbody' is up to date.
+cd benchmarks/nBody/parallelCK ; ./testInputs_small -r 10 -p 1
+3DonSphere_100000 :  -r 10 -o /tmp/ofile783110_729906 : '8.668', '8.621', '8.666', '8.625', '8.63', '8.627', '8.622', '8.667', '8.624', '8.665', geomean = 8.642
+3DinCube_100000 :  -r 10 -o /tmp/ofile733798_416504 : '17.8', '17.841', '17.791', '17.843', '17.792', '17.831', '17.835', '17.803', '17.833', '17.832', geomean = 17.82
+3Dplummer_100000 :  -r 10 -o /tmp/ofile553734_905715 : '44.181', '44.171', '44.206', '44.212', '44.228', '44.197', '44.226', '44.229', '44.178', '44.193', geomean = 44.202
+parallelCK : 1 : geomean of mins = 18.922, geomean of geomeans = 18.952
+
+cd benchmarks/BWDecode/listRank ; make   
+make: 'bw' is up to date.
+cd benchmarks/BWDecode/listRank ; ./testInputs_small -r 10 -p 1
+trigramString_25000000 :  -r 10 -o /tmp/ofile204951_170525 : '4.607', '4.563', '4.566', '4.564', '4.572', '4.56', '4.56', '4.562', '4.593', '4.563', geomean = 4.571
+chr22.dna :  -r 10 -o /tmp/ofile552531_452245 : '6.375', '6.41', '6.374', '6.374', '6.413', '6.377', '6.376', '6.384', '6.378', '6.373', geomean = 6.383
+wikisamp.xml :  -r 10 -o /tmp/ofile966506_542149 : '16.998', '16.98', '16.999', '16.998', '16.967', '16.976', '17.007', '17.', '16.973', '17.001', geomean = 16.99
+listRank : 1 : geomean of mins = 7.9, geomean of geomeans = 7.914
+Small Inputs
