@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import sys
+import subprocess
+
+parser = argparse.ArgumentParser(
+    description='Execute workloads for different HW/SW Prefetching configurations')
+
+parser.add_argument('-hon', '--hardwarePrefetcherOn', action="store_true",
+                    help='Turn on Hardware Prefetchers on the machine')
+parser.add_argument('-son', '--softwarePrefetcherOn', action="store_true",
+                    help='Turn on Software Prefetching in workloads')
+parser.add_argument('-w', '--workload', type=str,
+                    help='Specify a .txt file containing workloads')
+parser.add_argument('-o', '--outputFile', type=str,
+                    help='Specify a output file')
+
+args = parser.parse_args()
+
+terminator = ''
+for i in range(70):
+    terminator += '='
+
+if args.workload:
+    workload_file = args.workload
+else:
+    sys.stderr.write('Workload file misssing...\n')
+    sys.exit(1)
+
+if args.outputFile:
+    output_file = args.outputFile
+else:
+    sys.stderr.write('Output file misssing...\n')
+    sys.exit(1)
+
+if args.hardwarePrefetcherOn:
+    os.system("./hw_prefetch_toggle" + " " + "-hon")
+else:
+    os.system("./hw_prefetch_toggle")
+
+if args.softwarePrefetcherOn:
+    os.system("./sw_prefetch_toggle" + " " + "-son")
+else:
+    os.system("./sw_prefetch_toggle")
+
+main_dir = "/home/jayasri/fall-2025-sem1/ug-rd/pbbsbench-fall-2025/"
+print(terminator)
+print("Executing: make clean...")
+os.system("cd " + main_dir + "; make -s clean")
+print(terminator)
+
+run_command = "./runall -small -only"
+
+with open(workload_file, 'r') as f:
+    workloads = f.readlines()
+    print(workloads)
+
+# all_workloads_command = ''
+
+# for workload in workloads:
+#     print(workload)
+#     all_workloads_command += f"{run_command} {workload} ; "
+
+# all_workloads_command = all_workloads_command.strip().rstrip(';')
+
+# workload_exec_command = f"taskset -c 0 bash -c '{all_workloads_command}' 2>&1 | tee {output_file}"
+# os.system(f"cd {main_dir} && {workload_exec_command}")
+with open(output_file, 'a') as out:
+    for workload in workloads:
+        command = f"{run_command} {workload}"
+        exec_command = f"taskset -c 0 {command}"
+        ret = subprocess.run(["bash", "-c", f"cd {main_dir} && {exec_command}"],
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT,
+                             text=True,
+                             bufsize=1
+                             )
+        for line in ret.stdout:
+            sys.stdout.write(line)
+            out.write(line)
+            out.flush()
+        

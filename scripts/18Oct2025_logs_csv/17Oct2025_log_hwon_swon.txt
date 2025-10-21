@@ -1,0 +1,82 @@
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/comparisonSort/stableSampleSort ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I . -DPREFETCH_ENABLE  -I/home/jayasri/papi/src/install/include -include sort.h -o sort ../bench/sortTime.C -DHOMEGROWN -pthread -ldl  -L/home/jayasri/papi/src/install/lib -lpapi
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/stableSampleSort ; ./testInputs_small -r 10 -p 1
+randomSeq_10M_double :  -r 10 -o /tmp/ofile629932_509757 : '2.658', '2.636', '2.644', '2.635', '2.635', '2.633', '2.635', '2.635', '2.635', '2.635', geomean = 2.638
+randomSeq_10M_double : L1_I_MPKI = 0.09068, L1_D_MPKI = 0.14573, L2_MPKI = 0.29193, LLC_MPKI = 0.05726, #Instructions = 44048617443.1, #Cycles = 12089697370.9
+exptSeq_10M_double :  -r 10 -o /tmp/ofile894403_65158 : '2.336', '2.313', '2.314', '2.314', '2.314', '2.313', '2.312', '2.313', '2.314', '2.313', geomean = 2.315
+exptSeq_10M_double : L1_I_MPKI = 0.09389, L1_D_MPKI = 0.15338, L2_MPKI = 0.32354, LLC_MPKI = 0.06047, #Instructions = 38655534284.3, #Cycles = 10610979912.1
+almostSortedSeq_10M_double :  -r 10 -o /tmp/ofile21566_183786 : '1.5', '1.501', '1.501', '1.501', '1.5', '1.5', '1.501', '1.5', '1.5', '1.501', geomean = 1.5
+almostSortedSeq_10M_double : L1_I_MPKI = 0.12855, L1_D_MPKI = 0.21193, L2_MPKI = 0.45961, LLC_MPKI = 0.07621, #Instructions = 26869670073.3, #Cycles = 6878471039.8
+randomSeq_10M_double_pair_double :  -r 10 -o /tmp/ofile734521_231976 : '4.026', '3.988', '3.987', '3.987', '3.989', '3.989', '3.989', '3.988', '3.987', '3.988', geomean = 3.992
+randomSeq_10M_double_pair_double : L1_I_MPKI = 0.07118, L1_D_MPKI = 0.15687, L2_MPKI = 0.44803, LLC_MPKI = 0.10831, #Instructions = 63372365320.3, #Cycles = 18292269465.1
+trigramSeq_10M :  -r 10 -o /tmp/ofile83095_654425 : '10.155', '10.097', '10.103', '10.1', '10.109', '10.099', '10.106', '10.104', '10.095', '10.104', geomean = 10.107
+trigramSeq_10M : L1_I_MPKI = 0.05099, L1_D_MPKI = 0.10366, L2_MPKI = 0.28108, LLC_MPKI = 0.05399, #Instructions = 123438742377.8, #Cycles = 46319321778.8
+stableSampleSort : 1 : geomean of mins = 3.259, geomean of geomeans = 3.263, geomean of L1IMPKI = 0.083, geomean of L1DMPKI  = 0.15, geomean of L2MPKI = 0.352, geomean of LLCMPKI = 0.068, geomean of Instructions = 51374965149.939, geomean of Cycles = 14953350856.675
+Running only:  [['comparisonSort/stableSampleSort', False, 0]]
+Small Inputs
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/minSpanningForest/serialMST ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG -DPREFETCH_ENABLE  -o MSTTime.o -c ../bench/MSTTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG -DPREFETCH_ENABLE  -c MST.C -o MST.o
+g++ -I/home/jayasri/papi/src/install/include -o MST MSTTime.o MST.o  -L/home/jayasri/papi/src/install/lib -lpapi
+cd benchmarks/minSpanningForest/serialMST ; ./testInputs_small -r 10 -p 1
+randLocalGraph_WE_10_2000000 :  -r 10 -o /tmp/ofile298456_477062 : '4.982', '4.976', '4.984', '4.974', '4.974', '4.976', '4.971', '4.972', '4.982', '4.977', geomean = 4.977
+randLocalGraph_WE_10_2000000 : L1_I_MPKI = 0.0141, L1_D_MPKI = 1.30425, L2_MPKI = 2.78506, LLC_MPKI = 0.44555, #Instructions = 46398962231.7, #Cycles = 22313614571.7
+rMatGraph_WE_12_2250000 :  -r 10 -o /tmp/ofile317699_661963 : '7.399', '7.449', '7.409', '7.449', '7.4', '7.45', '7.398', '7.462', '7.401', '7.449', geomean = 7.426
+rMatGraph_WE_12_2250000 : L1_I_MPKI = 0.01376, L1_D_MPKI = 1.49071, L2_MPKI = 2.77019, LLC_MPKI = 0.57024, #Instructions = 64672389457.5, #Cycles = 33365124051.8
+3Dgrid_WE_8000000 :  -r 10 -o /tmp/ofile215457_969567 : '9.41', '9.406', '9.418', '9.395', '9.397', '9.402', '9.397', '9.395', '9.406', '9.397', geomean = 9.402
+3Dgrid_WE_8000000 : L1_I_MPKI = 0.01241, L1_D_MPKI = 1.61139, L2_MPKI = 3.10784, LLC_MPKI = 0.97722, #Instructions = 72219647970.2, #Cycles = 42495557889.4
+serialMST : 1 : geomean of mins = 7.017, geomean of geomeans = 7.031, geomean of L1IMPKI = 0.013, geomean of L1DMPKI  = 1.463, geomean of L2MPKI = 2.883, geomean of LLCMPKI = 0.628, geomean of Instructions = 60065834317.448, geomean of Cycles = 31627781905.116
+Running only:  [['minSpanningForest/serialMST', False, 0]]
+Small Inputs
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/suffixArray/parallelRange ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I . -DPREFETCH_ENABLE  -o SATime.o -c ../bench/SATime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I . -DPREFETCH_ENABLE  -c SA.C -o SA.o
+g++ -I/home/jayasri/papi/src/install/include -o SA SATime.o SA.o -DHOMEGROWN -pthread -ldl  -L/home/jayasri/papi/src/install/lib -lpapi
+cd benchmarks/suffixArray/parallelRange ; ./testInputs_small -r 10 -p 1
+trigramString_10000000 :  -r 10 -o /tmp/ofile914564_318305 : '7.562', '7.558', '7.553', '7.553', '7.555', '7.558', '7.554', '7.553', '7.557', '7.554', geomean = 7.556
+trigramString_10000000 : L1_I_MPKI = 0.00563, L1_D_MPKI = 0.27712, L2_MPKI = 0.84856, LLC_MPKI = 0.24711, #Instructions = 80101901335.7, #Cycles = 34639629904.4
+chr22.dna :  -r 10 -o /tmp/ofile6108_878627 : '36.651', '36.64', '36.63', '36.635', '36.638', '36.626', '36.633', '36.629', '36.633', '36.648', geomean = 36.636
+chr22.dna : L1_I_MPKI = 0.01046, L1_D_MPKI = 0.26034, L2_MPKI = 0.64121, LLC_MPKI = 0.21373, #Instructions = 392777676604.9, #Cycles = 166280415488.0
+parallelRange : 1 : geomean of mins = 16.633, geomean of geomeans = 16.638, geomean of L1IMPKI = 0.007, geomean of L1DMPKI  = 0.268, geomean of L2MPKI = 0.737, geomean of LLCMPKI = 0.229, geomean of Instructions = 177375981176.345, geomean of Cycles = 75893952676.443
+Running only:  [['suffixArray/parallelRange', False, 0]]
+Small Inputs
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/convexHull/serialHull ; make   
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG -DPREFETCH_ENABLE  -o hullTime.o -c ../bench/hullTime.C
+g++ -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG -DPREFETCH_ENABLE  -c hull.C -o hull.o
+g++ -I/home/jayasri/papi/src/install/include -o hull hullTime.o hull.o  -L/home/jayasri/papi/src/install/lib -lpapi
+cd benchmarks/convexHull/serialHull ; ./testInputs_small -r 10 -p 1
+2DinSphere_10000000 :  -r 10 -o /tmp/ofile505048_542183 : '1.763', '1.767', '1.763', '1.765', '1.766', '1.762', '1.763', '1.762', '1.763', '1.763', geomean = 1.764
+2DinSphere_10000000 : L1_I_MPKI = 0.00046, L1_D_MPKI = 1.35904, L2_MPKI = 4.69673, LLC_MPKI = 1.27302, #Instructions = 16308059371.4, #Cycles = 8085341643.7
+2Dkuzmin_10000000 :  -r 10 -o /tmp/ofile615953_667613 : '1.362', '1.362', '1.365', '1.361', '1.362', '1.362', '1.362', '1.365', '1.362', '1.362', geomean = 1.362
+2Dkuzmin_10000000 : L1_I_MPKI = 0.00039, L1_D_MPKI = 0.58416, L2_MPKI = 1.50926, LLC_MPKI = 0.2866, #Instructions = 14410014152.6, #Cycles = 6248166947.0
+2DonSphere_10000000 :  -r 10 -o /tmp/ofile298585_121772 : '17.105', '17.102', '17.103', '17.101', '17.104', '17.102', '17.11', '17.1', '17.101', '17.113', geomean = 17.104
+2DonSphere_10000000 : L1_I_MPKI = 0.00076, L1_D_MPKI = 2.82529, L2_MPKI = 5.43955, LLC_MPKI = 2.47329, #Instructions = 139953469784.4, #Cycles = 78392142495.2
+serialHull : 1 : geomean of mins = 3.449, geomean of geomeans = 3.451, geomean of L1IMPKI = 0., geomean of L1DMPKI  = 1.309, geomean of L2MPKI = 3.378, geomean of LLCMPKI = 0.966, geomean of Instructions = 32039332077.75, geomean of Cycles = 15821264031.129
+Running only:  [['convexHull/serialHull', False, 0]]
+Small Inputs
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/classify/decisionTree ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I . -DPREFETCH_ENABLE  -o classifyTime.o -c ../bench/classifyTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I . -DPREFETCH_ENABLE  -c classify.C -o classify.o
+g++ -I/home/jayasri/papi/src/install/include -o classify classifyTime.o classify.o -DHOMEGROWN -pthread -ldl  -L/home/jayasri/papi/src/install/lib -lpapi
+cd benchmarks/classify/decisionTree ; ./testInputs_small -r 10 -p 1
+covtype.data :  -r 10 -o /tmp/ofile588465_914897 : '163.74', '163.734', '163.729', '163.725', '163.729', '163.729', '163.754', '163.724', '163.696', '163.72', geomean = 163.728
+covtype.data : L1_I_MPKI = 0.30077, L1_D_MPKI = 0.01938, L2_MPKI = 0.02775, LLC_MPKI = 0.00339, #Instructions = 1579647703252.0, #Cycles = 749818080730.7
+decisionTree : 1 : geomean of mins = 163.696, geomean of geomeans = 163.728, geomean of L1IMPKI = 0.3, geomean of L1DMPKI  = 0.019, geomean of L2MPKI = 0.027, geomean of LLCMPKI = 0.003, geomean of Instructions = 1579647703252., geomean of Cycles = 749818080730.7
+Running only:  [['classify/decisionTree', False, 0]]
+Small Inputs

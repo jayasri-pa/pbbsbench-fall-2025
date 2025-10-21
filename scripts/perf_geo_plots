@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# --- 1. File Configuration ---
+# A dictionary to hold the file paths and their corresponding configuration names for the plot legend.
+files = {
+    'HW Prefetchers OFF, SW Prefetching OFF': '17Oct2025_perfGeo_hwoff_swoff.csv',
+    'HW Prefetchers OFF, SW Prefetching ON': '17Oct2025_perfGeo_hwoff_swon.csv',
+    'HW Prefetchers ON, SW Prefetching OFF': '17Oct2025_perfGeo_hwon_swoff.csv',
+    'HW Prefetchers ON, SW Prefetching ON': '17Oct2025_perfGeo_hwon_swon.csv'
+}
+
+# --- 2. Load and Combine Data ---
+# We'll store all the data in this list.
+all_data = []
+
+# Loop through the files dictionary.
+for config, file_path in files.items():
+    try:
+        # Read the current CSV file into a pandas DataFrame.
+        df = pd.read_csv(file_path)
+        # Add a 'Configuration' column to identify which file the data came from.
+        df['Configuration'] = config
+        # Add the DataFrame to our list.
+        all_data.append(df)
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' was not found. Please make sure it's in the same directory as the script.")
+        # If a file is not found, we exit the script.
+        exit()
+
+# Combine all the individual DataFrames into a single one.
+combined_df = pd.concat(all_data, ignore_index=True)
+
+
+# --- 3. Define Parameters to Plot ---
+# This list is dynamically created from the columns, automatically finding all parameters
+# to plot by excluding 'Workload' and the 'Configuration' column we added.
+parameters_to_plot = [col for col in combined_df.columns if col not in ['Workload', 'Configuration']]
+
+# --- 4. Generate and Save Plots ---
+# Loop through each parameter and create a plot.
+for param in parameters_to_plot:
+    print(f"Generating plot for {param}...")
+    
+    # Create a new figure for the plot.
+    plt.figure(figsize=(12, 8))
+    
+    # Create the bar plot using seaborn.
+    # x-axis: The 'Workload' (e.g., 'stableSampleSort').
+    # y-axis: The value of the current performance parameter.
+    # hue: The different configurations, which will create grouped bars.
+    sns.barplot(data=combined_df, x='Workload', y=param, hue='Configuration')
+    
+    # Add a title and labels.
+    plt.title(f'Geometric Mean Comparison: {param}', fontsize=16, fontweight='bold')
+    plt.xlabel('Workload', fontsize=12, fontweight='bold')
+    if param == 'Instructions': param = 'Instructions (10^12)'
+    if param == 'Cycles': param = 'Cycles (10^11)'
+    plt.ylabel(param, fontsize=12, fontweight='bold')
+    
+    # Rotate the x-axis labels to prevent them from overlapping.
+    plt.xticks(rotation=45, ha='right', fontsize=15)
+    
+    # Adjust the layout to make sure everything fits nicely.
+    plt.tight_layout()
+    
+    # Save the plot as a PNG file.
+    plt.savefig(f'{param}_geometric_mean_plot.png')
+    
+    # Close the plot to free up memory.
+    plt.close()
+
+print("\nAll plots have been generated and saved successfully!")

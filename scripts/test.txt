@@ -1,0 +1,18 @@
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/integerSort/parallelRadixSort ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I .  -I/home/jayasri/papi/src/install/include -include isort.h -o isort ../bench/isortTime.C -DHOMEGROWN -pthread -ldl  -L/home/jayasri/papi/src/install/lib -lpapi
+cd ../bench; make -s isortCheck
+cd benchmarks/integerSort/parallelRadixSort ; ./testInputs_small -r 1 -p 1
+randomSeq_10M_int : -b 24 -r 1 -o /tmp/ofile85890_856465 : '1.287', geomean = 1.287
+randomSeq_10M_int : L1_I_MPKI = 0.0067, L1_D_MPKI = 0.21445, L2_MPKI = 0.19236, LLC_MPKI = 0.18401, #Instructions = 17358271328.0, #Cycles = 5874985267.0
+exptSeq_10M_int : -b 24 -r 1 -o /tmp/ofile559996_636364 : '1.31', geomean = 1.31
+exptSeq_10M_int : L1_I_MPKI = 0.01193, L1_D_MPKI = 0.21489, L2_MPKI = 0.20245, LLC_MPKI = 0.18858, #Instructions = 17542726549.0, #Cycles = 5966111775.0
+randomSeq_10M_int_pair_int : -b 24 -r 1 -o /tmp/ofile201922_819681 : '1.304', geomean = 1.304
+randomSeq_10M_int_pair_int : L1_I_MPKI = 0.00768, L1_D_MPKI = 0.43141, L2_MPKI = 0.45132, LLC_MPKI = 0.3893, #Instructions = 17358274218.0, #Cycles = 5912956460.0
+randomSeq_10M_256_int_pair_int : -b 8 -r 1 -o /tmp/ofile63913_462604 : '0.455', geomean = 0.455
+randomSeq_10M_256_int_pair_int : L1_I_MPKI = 0.0021, L1_D_MPKI = 0.43671, L2_MPKI = 0.66311, LLC_MPKI = 0.64865, #Instructions = 5800076243.0, #Cycles = 2026016576.0
+parallelRadixSort : 1 : geomean of mins = 1., geomean of geomeans = 1., geomean of L1IMPKI = 0.005, geomean of L1DMPKI  = 0.305, geomean of L2MPKI = 0.328, geomean of LLCMPKI = 0.305, geomean of Instructions = 13232318734.002, geomean of Cycles = 4526749483.345
+Running only:  [['integerSort/parallelRadixSort', False, 0]]
+Small Inputs

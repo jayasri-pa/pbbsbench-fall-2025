@@ -1,0 +1,31 @@
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/comparisonSort/mergeSort ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I . -DPREFETCH_ENABLE  -I/home/jayasri/papi/src/install/include -include sort.h -o sort ../bench/sortTime.C -DHOMEGROWN -pthread -ldl  -L/home/jayasri/papi/src/install/lib -lpapi
+cd ../bench; make -s sortCheck
+cd benchmarks/comparisonSort/mergeSort ; ./testInputs_small -r 10 -p 1
+TEST TERMINATED ABNORMALLY:
+[./../bench/sortCheck  ../sequenceData/data/randomSeq_10M_double /tmp/ofile187583_230934
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+Aborted (core dumped)
+]
+Running only:  [['comparisonSort/mergeSort', False, 0]]
+Small Inputs
+HOSTNAME: jayasri-Bunker9
+running on 16 threads
+
+cd benchmarks/rayCast/kdTree ; make   
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I . -DPREFETCH_ENABLE  -o rayTime.o -c ../bench/rayTime.C
+g++ -DHOMEGROWN -pthread -mcx16     -g -std=c++17 -DNDEBUG -I . -DPREFETCH_ENABLE  -c ray.C -o ray.o
+g++ -g -I/home/jayasri/papi/src/install/include -o ray rayTime.o ray.o -DHOMEGROWN -pthread -ldl  -L/home/jayasri/papi/src/install/lib -lpapi
+cd benchmarks/rayCast/kdTree ; ./testInputs_small -r 10 -p 1
+TEST TERMINATED ABNORMALLY:
+[./../bench/rayCheck  ../geometryData/data/angelTriangles ../geometryData/data/angelRays /tmp/ofile495621_242238
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+Aborted (core dumped)
+]
+Running only:  [['rayCast/kdTree', False, 0]]
+Small Inputs

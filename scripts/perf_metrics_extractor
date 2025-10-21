@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""
+extract_metrics_to_csv.py
+
+Usage:
+  python3 extract_metrics_to_csv.py path/to/logfile.txt \
+        --inputs_csv metrics_per_input.csv \
+        --geomeans_csv metrics_geomean_per_workload.csv
+"""
+
+import re
+import csv
+import argparse
+
+parser = argparse.ArgumentParser(
+    description="Extract MPKI, Cycles, and Instructions from benchmark logs."
+)
+parser.add_argument("logfile", help="Path to the input log file")
+parser.add_argument("--inputs_csv", default="metrics_per_input.csv", help="CSV for per-input metrics")
+parser.add_argument("--geomeans_csv", default="metrics_geomean_per_workload.csv", help="CSV for workload geomeans")
+args = parser.parse_args()
+
+# ---------- Regex patterns ----------
+# Per-input metrics
+input_pattern = re.compile(
+    r"(?P<input>[\w\d\._\-]+)\s*:\s*L1_I_MPKI\s*=\s*(?P<L1I>[\d\.]+),\s*"
+    r"L1_D_MPKI\s*=\s*(?P<L1D>[\d\.]+),\s*L2_MPKI\s*=\s*(?P<L2>[\d\.]+),\s*"
+    r"LLC_MPKI\s*=\s*(?P<LLC>[\d\.]+),\s*#Instructions\s*=\s*(?P<instr>[\d\.]+),\s*#Cycles\s*=\s*(?P<cycles>[\d\.]+)"
+)
+
+# Workload marker (summary that sometimes appears after inputs)
+workload_marker = re.compile(r"Running only:\s*\[\s*\[\s*'(?P<wl>[\w/]+)'")
+
+# Workload from upfront 'cd benchmarks/... ; ./testInputs_small ...'
+cd_workload = re.compile(r"cd\s+benchmarks/(?P<wl>[\w/\-]+)\s*;.*\./testInputs_small")
+
+# Geomean metrics per workload (line like "stableSampleSort : 1 : geomean ...")
+geomean_pattern = re.compile(
+    r"(?P<workload>[\w\-/]+)\s*:\s*\d+\s*:\s*geomean of mins.*?"
+    r"geomean of L1IMPKI\s*=\s*(?P<L1I>[\d\.]+),\s*"
+    r"geomean of L1DMPKI\s*=\s*(?P<L1D>[\d\.]+),\s*"
+    r"geomean of L2MPKI\s*=\s*(?P<L2>[\d\.]+),\s*"
+    r"geomean of LLCMPKI\s*=\s*(?P<LLC>[\d\.]+),\s*"
+    r"geomean of Instructions\s*=\s*(?P<instr>[\d\.]+),\s*"
+    r"geomean of Cycles\s*=\s*(?P<cycles>[\d\.]+)"
+)
+
+# ---------- Data holders ----------
+input_rows = []      # list of dicts for per-input metrics
+geomean_rows = []    # list of dicts for per-workload geomeans
+current_workload = None
+pending_inputs = []  # indices of input_rows that need backfill (if cd_workload appears later)
+
+# ---------- Parse file ----------
+with open(args.logfile, "r") as fh:
+    for lineno, line in enumerate(fh, start=1):
+        line = line.strip()
+
+        # 1) Try to detect an upfront workload via the "cd benchmarks/..." line
+        mcd = cd_workload.search(line)
+        if mcd:
+            # When we find cd ... ; ./testInputs_small we set the current workload immediately
+            current_workload = mcd.group("wl")
+            # backfill any pending inputs that were collected before this assignment
+            for idx in pending_inputs:
+                input_rows[idx]["workload"] = current_workload
+            pending_inputs.clear()
+            continue
+
+        # 2) If no cd line, a 'Running only' marker may give the workload (sometimes appears later)
+        mrunning = workload_marker.search(line)
+        if mrunning:
+            wl = mrunning.group("wl")
+            current_workload = wl
+            # backfill any pending inputs
+            for idx in pending_inputs:
+                input_rows[idx]["workload"] = current_workload
+            pending_inputs.clear()
+            continue
+
+        # 3) Per-input metric line
+        m = input_pattern.search(line)
+        if m:
+            d = m.groupdict()
+            try:
+                instr = float(d["instr"])
+                cycles = float(d["cycles"])
+                # Calculate IPC, handle division by zero
+                d["ipc"] = instr / cycles if cycles > 0 else 0
+            except (ValueError, KeyError):
+                d["ipc"] = 0  # Default to 0 if conversion fails
+            # default workload may be None if not yet known
+            d["workload"] = current_workload
+            input_rows.append(d)
+            if current_workload is None:
+                # remember row index to backfill later when workload appears
+                pending_inputs.append(len(input_rows) - 1)
+            continue
+
+        # 4) Geomean pattern (workload-level)
+        g = geomean_pattern.search(line)
+        if g:
+            d = g.groupdict()
+            try:
+                instr = float(d["instr"])
+                cycles = float(d["cycles"])
+                # Calculate IPC, handle division by zero
+                d["ipc"] = instr / cycles if cycles > 0 else 0
+            except (ValueError, KeyError):
+                d["ipc"] = 0 # Default to 0 if conversion fails
+            geomean_rows.append(d)
+            continue
+
+# If any pending inputs remain at EOF, leave their workload as blank string rather than None
+for idx in pending_inputs:
+    if input_rows[idx]["workload"] is None:
+        input_rows[idx]["workload"] = ""
+
+# ---------- Write per-input CSV ----------
+with open(args.inputs_csv, "w", newline="") as outf:
+    writer = csv.writer(outf)
+    writer.writerow(["Workload", "Input", "L1I_MPKI", "L1D_MPKI", "L2_MPKI", "LLC_MPKI", "Instructions", "Cycles", "IPC"])
+    for r in input_rows:
+        writer.writerow([
+            r.get("workload", ""),
+            r["input"],
+            r["L1I"],
+            r["L1D"],
+            r["L2"],
+            r["LLC"],
+            r["instr"],
+            r["cycles"],
+            r.get("ipc", 0)
+        ])
+
+# ---------- Write geomeans CSV ----------
+with open(args.geomeans_csv, "w", newline="") as outf:
+    writer = csv.writer(outf)
+    writer.writerow(["Workload", "L1I_MPKI", "L1D_MPKI", "L2_MPKI", "LLC_MPKI", "Instructions", "Cycles", "IPC"])
+    for r in geomean_rows:
+        writer.writerow([
+            r.get("workload", ""),
+            r["L1I"],
+            r["L1D"],
+            r["L2"],
+            r["LLC"],
+            r["instr"],
+            r["cycles"],
+            r.get("ipc", 0)
+        ])
+
+print(f"✅ Wrote {len(input_rows)} per-input rows -> {args.inputs_csv}")
+print(f"✅ Wrote {len(geomean_rows)} per-workload rows -> {args.geomeans_csv}")

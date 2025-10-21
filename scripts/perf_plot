@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# --- 1. File Configuration ---
+# Using the exact file names as requested.
+files = {
+    'HW Prefetchers OFF, SW Prefetching OFF': '17Oct2025_perf_hwoff_swoff.csv',
+    'HW Prefetchers OFF, SW Prefetching ON': '17Oct2025_perf_hwoff_swon.csv',
+    'HW Prefetchers ON, SW Prefetching OFF': '17Oct2025_perf_hwon_swoff.csv',
+    'HW Prefetchers ON, SW Prefetching ON': '17Oct2025_perf_hwon_swon.csv'
+}
+
+# --- 2. Load and Combine Data ---
+all_data = []
+
+for config, file_path in files.items():
+    try:
+        df = pd.read_csv(file_path)
+        df['Configuration'] = config
+        all_data.append(df)
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' was not found. Please ensure it is in the same directory as the script.")
+        exit()
+
+# Combine all data into a single DataFrame.
+combined_df = pd.concat(all_data, ignore_index=True)
+
+# --- 3. Clean and Prepare Labels ---
+# Shorten the 'Workload' name to only include the text after the '/'.
+# For example, 'comparisonSort/stableSampleSort' becomes 'stableSampleSort'.
+combined_df['Workload_Clean'] = combined_df['Workload'].str.split('/').str[-1]
+
+# Create a new column for the x-axis by combining the cleaned workload and the original input.
+# The input file name is not modified.
+combined_df['Workload_Input'] = combined_df['Workload_Clean'] + ':\n' + combined_df['Input']
+
+
+# --- 4. Define Parameters to Plot ---
+parameters_to_plot = ['L1I_MPKI', 'L1D_MPKI', 'L2_MPKI', 'LLC_MPKI', 'Instructions', 'Cycles', 'IPC']
+
+# --- 5. Generate and Save Plots ---
+for param in parameters_to_plot:
+    print(f"Generating plot for {param}...")
+    
+    # Create a new figure with a large size to fit all the labels.
+    plt.figure(figsize=(20, 13))
+    
+    # Create the bar plot using the new combined labels.
+    sns.barplot(data=combined_df, x='Workload_Input', y=param, hue='Configuration')
+    
+    # Add title and labels.
+    plt.title(f'Performance Comparison: {param}', fontsize=20, fontweight='bold')
+    plt.xlabel('Workload and Input', fontsize=20, fontweight='bold')
+    if param == 'Instructions': param = 'Instructions (10^12)'
+    if param == 'Cycles': param = 'Cycles (10^11)'
+    plt.ylabel(param, fontsize=20, fontweight='bold')
+    
+    # Rotate x-axis labels for better visibility.
+    plt.xticks(rotation=45, ha='right', fontsize=14)
+    
+    plt.yticks(fontsize=15)
+
+    plt.legend(fontsize=15)
+
+    # Add a grid to make the chart easier to read.
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    
+    # Adjust layout to ensure nothing is cut off.
+    plt.tight_layout()
+    
+    # Save the plot to a file.
+    plt.savefig(f'{param}_final_plot.png', dpi=300)
+    
+    # Close the plot to release memory.
+    plt.close()
+
+print("\nAll plots have been generated and saved successfully!")
