@@ -15,8 +15,12 @@ INCLUDE =
 all : $(BENCH) testInputs
 	cd ../bench; make -s $(CHECK)
 
+PAPI_DIR = ${HOME}/papi/src/install
+PAPI_INC = -I${PAPI_DIR}/include
+PAPI_LIB = -L${PAPI_DIR}/lib -lpapi
+
 $(BENCH) : $(TIME) $(BENCH).h $(REQUIRE)
-	$(CC) $(CFLAGS) $(INCLUDE) -include $(BENCH).h -o $(BENCH) $(TIME) $(LFLAGS)
+	$(CC) $(CFLAGS) $(INCLUDE) $(PAPI_INC) -include $(BENCH).h -o $(BENCH) $(TIME) $(LFLAGS) $(PAPI_LIB)
 
 testInputs : ../bench/testInputs ../bench/testInputs_small
 	cp ../bench/testInputs ../bench/testInputs_small .
