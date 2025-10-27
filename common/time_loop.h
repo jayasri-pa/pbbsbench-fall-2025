@@ -56,13 +56,6 @@ void clear_cache() {
     // printf("Cache thrashed using LCG method.\n");
 }
 
-template <class G>
-void runf_wrapper(G&& runf_func) __attribute__((noinline));
-template <class G>
-void runf_wrapper(G&& runf_func) {
-  runf_func();
-}
-
 template<class F, class G, class H>
 void time_loop(int rounds, double delay, F initf, G runf, H endf) {
   parlay::internal::timer t;
@@ -75,7 +68,7 @@ void time_loop(int rounds, double delay, F initf, G runf, H endf) {
     initf();
     clear_cache();
     t.start();
-    runf_wrapper(runf);
+    runf();
     t.next("");
     endf();
   }
