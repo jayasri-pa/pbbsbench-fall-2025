@@ -5,9 +5,9 @@ JEMALLOCLD = $(shell jemalloc-config --libdir)
 JEMALLOC = -L$(JEMALLOCLD) -ljemalloc 
 endif
 
-CCFLAGS = -mcx16 -DPARLAY_SEQUENTIAL     -std=c++17 -DNDEBUG
+CCFLAGS = -mcx16 -g -DPARLAY_SEQUENTIAL     -std=c++17 #-DNDEBUG
 CLFLAGS = $(JEMALLOC)
 
 CC = g++
 CFLAGS = $(CCFLAGS) -DPREFETCH_ENABLE
-LFLAGS = $(CLFLAGS)
+LFLAGS = $(CLFLAGS) -static
