@@ -202,13 +202,13 @@ def compiletest(sdir) :
     os.system(ss)
 
 def runtest(test,procs,check, keep) :
-    if (procs==1) : rounds = 10 #1
-    elif (procs < 16) : rounds = 10 #3
-    elif (procs < 64) : rounds = 10 #3
-    else : rounds = 10 #5
+    if (procs==1) : rounds = 1
+    elif (procs < 16) : rounds = 3
+    elif (procs < 64) : rounds = 3
+    else : rounds = 5
     dir = "benchmarks/" + test[0]
     numactl = useNumactl and (procs > 1)
-    options = "-r " + repr(rounds)
+    options = "-r " + repr(10) #repr(rounds)
     if (doSmall) : testInputs = "./testInputs_small"
     else : testInputs = "./testInputs"
     if (procs > 0) :
