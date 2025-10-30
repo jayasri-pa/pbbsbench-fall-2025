@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+import argparse
+import os 
+
+parser = argparse.ArgumentParser(description='Toggles HW Prefetchers')
+
+parser.add_argument('-hon', '--hardwarePrefetcherOn', action="store_true", help='Turn on Hardware Prefetchers on the machine')
+
+args = parser.parse_args()
+
+terminator = ''
+for i in range(70):
+    terminator += '='
+
+# print("Allowing Writes to MSR, with All Levels of Permissions...")
+# os.system("echo -1 | sudo tee /sys/module/msr/parameters/allow_writes")
+# print(terminator)
+
+if args.hardwarePrefetcherOn:
+    os.system("sudo wrmsr -a 0x1A4 0x0")
+    print("Hardware Prefetchers turned On...")
+    print(terminator)
+else:
+    os.system("sudo wrmsr -a 0x1A4 0xF")
+    print("Hardware Prefetchers turned Off...")
+    print(terminator)
+
+print("Verifying...")
+os.system("sudo rdmsr -a 0x1A4")
+print("Done!...")
